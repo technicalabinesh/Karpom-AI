@@ -1,5 +1,5 @@
 """
-Karpom AI - Next-Gen Academic Intelligence Platform (Dribbble SaaS UI)
+Karpom AI - Next-Gen Haven Alpine Glass Academic Platform
 Run:
     streamlit run app.py
 """
@@ -29,8 +29,8 @@ from study_tools import (
 load_dotenv()
 
 st.set_page_config(
-    page_title="Karpom AI | Next-Gen Academic Intelligence",
-    page_icon="✦",
+    page_title="Karpom AI | Study with ease.",
+    page_icon="🌸",
     layout="wide",
     initial_sidebar_state="collapsed",
 )
@@ -71,321 +71,258 @@ def load_chat_history(session_id: str):
     return []
 
 # ============================================================
-# DRIBBLE-GRADE MATTE DARK DESIGN SYSTEM
+# HAVEN ALPINE MEADOW DESIGN SYSTEM (INSPIRED BY REFERENCE)
 # ============================================================
-DRIBBBLE_SAAS_CSS = """
+HAVEN_CSS = """
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,700;1,800&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 :root {
-    --bg-dark: #0A0A0C;
-    --card-dark: #121216;
-    --card-surface: #18181E;
-    --border: #23232C;
-    --border-hover: #3E3E4E;
-    --text-pure: #FFFFFF;
-    --text-dim: #9E9EA8;
+    --text-main: #0F172A;
+    --text-muted: #475569;
+    --glass-pill: rgba(255, 255, 255, 0.88);
+    --glass-card: rgba(255, 255, 255, 0.92);
+    --glass-border: rgba(255, 255, 255, 0.95);
+    --shadow-haven: 0 20px 40px -10px rgba(15, 23, 42, 0.12), 0 0 1px 1px rgba(255, 255, 255, 0.9) inset;
 }
 
-/* Global Reset */
+/* Global Font & Fullscreen Alpine Meadow Wallpaper */
 html, body, [class*="css"] {
     font-family: 'Plus Jakarta Sans', sans-serif !important;
-    background-color: var(--bg-dark) !important;
-    color: var(--text-pure) !important;
+    color: var(--text-main) !important;
 }
 
 .stApp {
     background: 
-        radial-gradient(ellipse at 50% 0%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 40%, rgba(244, 63, 94, 0.08) 0%, transparent 40%),
-        radial-gradient(ellipse at 20% 80%, rgba(14, 165, 233, 0.08) 0%, transparent 40%),
-        #0A0A0C !important;
-    background-attachment: fixed;
+        radial-gradient(ellipse at 50% 15%, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 60%),
+        url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2070&auto=format&fit=crop") no-repeat center center fixed !important;
+    background-size: cover !important;
 }
 
 .main .block-container {
-    max-width: 1240px;
-    padding: 1.25rem 1.5rem 5rem;
+    max-width: 1180px;
+    padding: 1.5rem 1.5rem 5rem;
 }
 
-/* Floating Pill Navbar */
-.nav-pill-container {
-    background: rgba(18, 18, 22, 0.85);
-    backdrop-filter: blur(20px);
-    border: 1px solid var(--border);
+/* Floating Top Haven Pill Nav */
+.haven-navbar {
+    background: var(--glass-pill);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--glass-border);
     border-radius: 9999px;
-    padding: 10px 24px;
+    padding: 10px 26px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-    margin-bottom: 36px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    margin: 0 auto 36px;
+    max-width: 760px;
 }
 
-.brand-title {
-    font-size: 1.25rem;
+.haven-brand {
+    font-size: 1.15rem;
     font-weight: 800;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.02em;
     display: flex;
     align-items: center;
     gap: 8px;
-    color: #FFFFFF !important;
+    color: #0F172A !important;
 }
 
 .status-badge {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 5px 14px;
+    padding: 4px 14px;
     border-radius: 9999px;
-    font-size: 0.78rem;
+    font-size: 0.76rem;
     font-weight: 700;
-    background: rgba(34, 197, 94, 0.12);
-    color: #4ADE80 !important;
-    border: 1px solid rgba(74, 222, 128, 0.3);
+    background: #F0FDF4;
+    color: #15803D !important;
+    border: 1px solid #BBF7D0;
 }
 
 .status-dot {
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background-color: #4ADE80;
-    box-shadow: 0 0 8px #4ADE80;
+    background-color: #22C55E;
 }
 
-/* Hero Typography */
-.hero-wrapper {
+/* Hero Section Typography */
+.haven-hero {
     text-align: center;
-    padding: 10px 0 36px;
+    padding: 10px 0 28px;
 }
 
 .hero-pill-badge {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    color: #F8FAFC !important;
-    padding: 6px 16px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(16px);
+    border: 1px solid #FFFFFF;
+    color: #334155 !important;
+    padding: 6px 18px;
     border-radius: 9999px;
     font-size: 0.82rem;
     font-weight: 600;
-    margin-bottom: 18px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+    margin-bottom: 20px;
 }
 
-.hero-headline {
-    font-size: 3.2rem;
-    font-weight: 800;
+.haven-headline {
+    font-size: 3.8rem;
+    font-weight: 900;
     letter-spacing: -0.04em;
-    line-height: 1.15;
-    color: #FFFFFF !important;
+    line-height: 1.05;
+    color: #0F172A !important;
     margin: 0 0 14px;
+    text-shadow: 0 2px 20px rgba(255, 255, 255, 0.8);
 }
 
-.hero-italic {
-    font-style: italic;
-    font-weight: 400;
-    color: #A1A1AA !important;
-}
-
-.hero-subtitle {
-    font-size: 1.05rem;
-    color: var(--text-dim) !important;
-    max-width: 680px;
-    margin: 0 auto;
-    line-height: 1.6;
-}
-
-/* Section Header */
-.section-tag {
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: #A1A1AA;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-/* 8-Feature 3D Card Deck */
-.feature-card {
-    background: var(--card-dark);
-    border: 1px solid var(--border);
-    border-radius: 22px;
-    padding: 24px;
-    min-height: 190px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-    margin-bottom: 16px;
-}
-
-.feature-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--border-hover);
-    box-shadow: 0 14px 34px -4px rgba(0, 0, 0, 0.6);
-}
-
-.card-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-}
-
-.card-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.35rem;
-}
-
-.card-number {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: #71717A;
-}
-
-.card-title {
+.haven-subtitle {
     font-size: 1.15rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    margin: 0 0 6px;
-    color: #FFFFFF !important;
+    color: #334155 !important;
+    max-width: 580px;
+    margin: 0 auto 24px;
+    line-height: 1.55;
+    font-weight: 500;
 }
 
-.card-desc {
-    font-size: 0.84rem;
-    color: var(--text-dim) !important;
-    line-height: 1.45;
-    margin: 0;
-}
-
-/* Feature Trigger Buttons in Columns */
+/* 8-Feature Interactive Floating Dock */
 div[data-testid="stHorizontalBlock"] div[data-testid="stButton"] > button {
-    background: #18181E !important;
-    border: 1px solid #272732 !important;
-    color: #FFFFFF !important;
-    border-radius: 14px !important;
+    background: rgba(255, 255, 255, 0.9) !important;
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.95) !important;
+    color: #0F172A !important;
+    border-radius: 9999px !important;
     font-weight: 700 !important;
-    font-size: 0.88rem !important;
-    min-height: 46px !important;
-    transition: all 0.2s ease !important;
+    font-size: 0.86rem !important;
+    min-height: 44px !important;
+    padding: 8px 16px !important;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05) !important;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 div[data-testid="stHorizontalBlock"] div[data-testid="stButton"] > button:hover {
-    background: #23232C !important;
-    border-color: #6366F1 !important;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.25) !important;
+    background: #FFFFFF !important;
+    transform: translateY(-3px) scale(1.02) !important;
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12) !important;
 }
 
-/* Workbench Container */
-.workbench-panel {
-    background: #121216 !important;
-    border: 1px solid #23232C !important;
-    border-radius: 24px;
-    padding: 28px;
-    margin-top: 24px;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+/* Active Frosted Glass Workbench */
+.haven-workbench {
+    background: var(--glass-card) !important;
+    backdrop-filter: blur(32px) saturate(180%);
+    -webkit-backdrop-filter: blur(32px) saturate(180%);
+    border: 1.5px solid var(--glass-border) !important;
+    border-radius: 28px;
+    padding: 32px 36px;
+    margin-top: 18px;
+    box-shadow: var(--shadow-haven);
 }
 
 .workbench-title {
-    font-size: 1.35rem;
+    font-size: 1.45rem;
     font-weight: 800;
     letter-spacing: -0.03em;
+    color: #0F172A;
     margin: 0 0 4px;
-    color: #FFFFFF !important;
 }
 
 .workbench-desc {
-    font-size: 0.92rem;
-    color: var(--text-dim) !important;
+    font-size: 0.94rem;
+    color: #64748B;
     margin: 0 0 20px;
+    line-height: 1.5;
 }
 
-/* Chat Input (Matte Style) */
+/* Chat Input (Haven Minimalist Style) */
 div[data-testid="stChatInput"] { background: transparent !important; }
 div[data-testid="stChatInput"] > div {
-    background: #18181E !important;
-    border: 1px solid #272732 !important;
-    border-radius: 16px !important;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+    background: #FFFFFF !important;
+    border: 1.5px solid #CBD5E1 !important;
+    border-radius: 9999px !important;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06) !important;
+    padding: 4px 10px !important;
 }
 
 div[data-testid="stChatInput"] textarea {
-    color: #FFFFFF !important;
-    -webkit-text-fill-color: #FFFFFF !important;
+    color: #0F172A !important;
+    -webkit-text-fill-color: #0F172A !important;
+    font-size: 0.96rem !important;
 }
 
-/* Chat Bubbles */
+/* Chat Message Bubbles */
 .chat-user {
-    background: #4F46E5 !important;
+    background: #0F172A !important;
     color: #FFFFFF !important;
     padding: 14px 18px;
     border-radius: 18px 18px 4px 18px;
     margin: 12px 0 12px auto;
     max-width: 80%;
     font-size: 0.95rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    line-height: 1.55;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.15);
 }
 .chat-user * { color: #FFFFFF !important; }
 
 .chat-ai {
-    background: #18181E !important;
-    color: #F4F4F5 !important;
-    padding: 18px 22px;
+    background: #FFFFFF !important;
+    color: #0F172A !important;
+    padding: 20px 24px;
     border-radius: 18px 18px 18px 4px;
     margin: 12px 0;
     max-width: 88%;
-    border: 1px solid #272732;
-    font-size: 0.95rem;
-    line-height: 1.65;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+    font-size: 0.96rem;
+    line-height: 1.7;
 }
-.chat-ai * { color: #F4F4F5 !important; }
+.chat-ai * { color: #0F172A !important; }
 
-/* Dark Form Controls */
+/* Primary Action Button */
+div[data-testid="stButton"] > button[kind="primary"] {
+    background: #0F172A !important;
+    color: #FFFFFF !important;
+    border: none !important;
+    border-radius: 9999px !important;
+    font-weight: 700 !important;
+    padding: 10px 24px !important;
+    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.25) !important;
+    transition: all 0.2s ease !important;
+}
+
+div[data-testid="stButton"] > button[kind="primary"]:hover {
+    background: #1E293B !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.35) !important;
+}
+
+/* Clean Form Controls */
 div[data-testid="stTextInput"] input,
 div[data-testid="stTextArea"] textarea,
 div[data-testid="stNumberInput"] input,
 div[data-testid="stSelectbox"] div[data-baseweb="select"] {
-    background-color: #18181E !important;
-    color: #FFFFFF !important;
-    -webkit-text-fill-color: #FFFFFF !important;
-    border: 1px solid #272732 !important;
-    border-radius: 12px !important;
+    background-color: #FFFFFF !important;
+    color: #0F172A !important;
+    -webkit-text-fill-color: #0F172A !important;
+    border: 1.5px solid #CBD5E1 !important;
+    border-radius: 14px !important;
 }
 
 div[data-testid="stFileUploaderDropzone"] {
-    background: #18181E !important;
-    border: 2px dashed #2E2E3C !important;
-    border-radius: 16px !important;
-}
-div[data-testid="stFileUploaderDropzone"] * { color: #A1A1AA !important; }
-
-/* Primary Button */
-div[data-testid="stButton"] > button[kind="primary"] {
-    background: #FFFFFF !important;
-    color: #0A0A0C !important;
-    border: none !important;
-    border-radius: 12px !important;
-    font-weight: 700 !important;
-    padding: 10px 24px !important;
-    box-shadow: 0 4px 18px rgba(255, 255, 255, 0.2) !important;
+    background: #F8FAFC !important;
+    border: 2px dashed #CBD5E1 !important;
+    border-radius: 18px !important;
 }
 
 #MainMenu, footer, header { visibility: hidden; }
 </style>
 """
-st.markdown(DRIBBBLE_SAAS_CSS, unsafe_allow_html=True)
+st.markdown(HAVEN_CSS, unsafe_allow_html=True)
 
 # ============================================================
 # STATE INITIALIZATION
@@ -393,32 +330,32 @@ st.markdown(DRIBBBLE_SAAS_CSS, unsafe_allow_html=True)
 if "session_id" not in st.session_state:
     st.session_state.session_id = str(uuid.uuid4())
 
-if "active_feature" not in st.session_state:
-    st.session_state.active_feature = "1"
+if "active_tool" not in st.session_state:
+    st.session_state.active_tool = "1"
 
 if "chat_history" not in st.session_state:
     db_history = load_chat_history(st.session_state.session_id)
     st.session_state.chat_history = db_history if db_history else []
 
-def set_feature(num: str):
-    st.session_state.active_feature = num
+def set_tool(num: str):
+    st.session_state.active_tool = num
     st.rerun()
 
 # ============================================================
-# FLOATING PILL NAVBAR
+# TOP FLOATING PILL NAVBAR (HAVEN STYLE)
 # ============================================================
 ai_connected = chat_ai_available()
 status_html = (
-    '<span class="status-badge"><span class="status-dot"></span>Cloud AI Active</span>'
+    '<span class="status-badge"><span class="status-dot"></span>GPT-5.4 Active</span>'
     if ai_connected
-    else '<span class="status-badge" style="color:#FBBF24 !important; border-color:rgba(251,191,36,0.3); background:rgba(251,191,36,0.1);"><span class="status-dot" style="background:#FBBF24;"></span>Offline Mode</span>'
+    else '<span class="status-badge" style="color:#B45309 !important; background:#FFFBEB; border-color:#FDE68A;"><span class="status-dot" style="background:#F59E0B;"></span>Offline Mode</span>'
 )
 
 st.markdown(
     f"""
-    <div class="nav-pill-container">
-        <div class="brand-title">
-            <span>✦</span> Karpom AI
+    <div class="haven-navbar">
+        <div class="haven-brand">
+            <span>🌸</span> Karpom AI
         </div>
         <div>
             {status_html}
@@ -429,16 +366,15 @@ st.markdown(
 )
 
 # ============================================================
-# HERO HEADER SECTION (DRIBBLE STYLE)
+# HAVEN HERO SECTION
 # ============================================================
 st.markdown(
     """
-    <div class="hero-wrapper">
-        <div class="hero-pill-badge">✦ Academic Intelligence Suite — 8 Powerful Tools</div>
-        <h1 class="hero-headline">Build Your Mind,<br><span class="hero-italic">Accelerate</span> Your Knowledge</h1>
-        <p class="hero-subtitle">
-            An elite cognitive space engineered for students and researchers. Solve complex homework with Vision AI, 
-            query textbooks, master interactive exams, and command voice intelligence in real time.
+    <div class="haven-hero">
+        <div class="hero-pill-badge">We just launched Karpom AI 2.0 🚀</div>
+        <h1 class="haven-headline">Study with ease.</h1>
+        <p class="haven-subtitle">
+            Learn smarter with AI that understands you.<br>So you can take a breath.
         </p>
     </div>
     """,
@@ -446,181 +382,49 @@ st.markdown(
 )
 
 # ============================================================
-# 8-FEATURE VISUAL CARDS DECK (4x2 GRID)
+# 8-FEATURE HAVEN FLOATING DOCK (CENTERED & INTERACTIVE)
 # ============================================================
-st.markdown('<div class="section-tag"><span>✦</span> SELECT A FEATURE TO LAUNCH WORKBENCH</div>', unsafe_allow_html=True)
+d1, d2, d3, d4 = st.columns(4)
+with d1:
+    if st.button("🤖 1. AI Chatbot", use_container_width=True, type="primary" if st.session_state.active_tool == "1" else "secondary"):
+        set_tool("1")
+with d2:
+    if st.button("🎤 2. Voice Q&A", use_container_width=True, type="primary" if st.session_state.active_tool == "2" else "secondary"):
+        set_tool("2")
+with d3:
+    if st.button("📷 3. Vision Solver", use_container_width=True, type="primary" if st.session_state.active_tool == "3" else "secondary"):
+        set_tool("3")
+with d4:
+    if st.button("📄 4. Document Q&A", use_container_width=True, type="primary" if st.session_state.active_tool == "4" else "secondary"):
+        set_tool("4")
 
-# Row 1 (Cards 1 to 4)
-c1, c2, c3, c4 = st.columns(4)
-
-with c1:
-    st.markdown(
-        """
-        <div class="feature-card" style="border-top: 3px solid #8B5CF6;">
-            <div>
-                <div class="card-top">
-                    <div class="card-icon" style="background: rgba(139, 92, 246, 0.15); color:#A78BFA;">🤖</div>
-                    <span class="card-number">01</span>
-                </div>
-                <h4 class="card-title">Offline AI Chatbot</h4>
-                <p class="card-desc">Real-time conversational intelligence with zero-downtime offline fallback.</p>
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-    if st.button("Launch Chatbot ↗", key="btn_f1", use_container_width=True, type="primary" if st.session_state.active_feature == "1" else "secondary"):
-        set_feature("1")
-
-with c2:
-    st.markdown(
-        """
-        <div class="feature-card" style="border-top: 3px solid #0EA5E9;">
-            <div>
-                <div class="card-top">
-                    <div class="card-icon" style="background: rgba(14, 165, 233, 0.15); color:#38BDF8;">🎤</div>
-                    <span class="card-number">02</span>
-                </div>
-                <h4 class="card-title">Voice Asking</h4>
-                <p class="card-desc">Whisper speech-to-text question solving with instant audio transcription.</p>
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-    if st.button("Launch Voice Q&A ↗", key="btn_f2", use_container_width=True, type="primary" if st.session_state.active_feature == "2" else "secondary"):
-        set_feature("2")
-
-with c3:
-    st.markdown(
-        """
-        <div class="feature-card" style="border-top: 3px solid #F43F5E;">
-            <div>
-                <div class="card-top">
-                    <div class="card-icon" style="background: rgba(244, 63, 94, 0.15); color:#FB7185;">📷</div>
-                    <span class="card-number">03</span>
-                </div>
-                <h4 class="card-title">Image Question Solver</h4>
-                <p class="card-desc">Vision AI step-by-step solver for handwritten math, diagrams, & test photos.</p>
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-    if st.button("Launch Vision Solver ↗", key="btn_f3", use_container_width=True, type="primary" if st.session_state.active_feature == "3" else "secondary"):
-        set_feature("3")
-
-with c4:
-    st.markdown(
-        """
-        <div class="feature-card" style="border-top: 3px solid #10B981;">
-            <div>
-                <div class="card-top">
-                    <div class="card-icon" style="background: rgba(16, 185, 129, 0.15); color:#34D399;">📄</div>
-                    <span class="card-number">04</span>
-                </div>
-                <h4 class="card-title">PDF / Notes Q&A</h4>
-                <p class="card-desc">Chat directly with uploaded research papers, textbooks, and lecture slides.</p>
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-    if st.button("Launch Document Q&A ↗", key="btn_f4", use_container_width=True, type="primary" if st.session_state.active_feature == "4" else "secondary"):
-        set_feature("4")
-
-# Row 2 (Cards 5 to 8)
-c5, c6, c7, c8 = st.columns(4)
-
-with c5:
-    st.markdown(
-        """
-        <div class="feature-card" style="border-top: 3px solid #F59E0B;">
-            <div>
-                <div class="card-top">
-                    <div class="card-icon" style="background: rgba(245, 158, 11, 0.15); color:#FBBF24;">📝</div>
-                    <span class="card-number">05</span>
-                </div>
-                <h4 class="card-title">AI Notes Generator</h4>
-                <p class="card-desc">Synthesize lecture transcripts into structured Cornell notes and recall cues.</p>
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-    if st.button("Launch Notes Maker ↗", key="btn_f5", use_container_width=True, type="primary" if st.session_state.active_feature == "5" else "secondary"):
-        set_feature("5")
-
-with c6:
-    st.markdown(
-        """
-        <div class="feature-card" style="border-top: 3px solid #D946EF;">
-            <div>
-                <div class="card-top">
-                    <div class="card-icon" style="background: rgba(217, 70, 239, 0.15); color:#E879F9;">🧠</div>
-                    <span class="card-number">06</span>
-                </div>
-                <h4 class="card-title">MCQ & Exam Generator</h4>
-                <p class="card-desc">Generate tailored practice tests with answer keys and deep explanations.</p>
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-    if st.button("Launch Quiz Generator ↗", key="btn_f6", use_container_width=True, type="primary" if st.session_state.active_feature == "6" else "secondary"):
-        set_feature("6")
-
-with c7:
-    st.markdown(
-        """
-        <div class="feature-card" style="border-top: 3px solid #3B82F6;">
-            <div>
-                <div class="card-top">
-                    <div class="card-icon" style="background: rgba(59, 130, 246, 0.15); color:#60A5FA;">📅</div>
-                    <span class="card-number">07</span>
-                </div>
-                <h4 class="card-title">Study Planner</h4>
-                <p class="card-desc">Personalized milestone revision roadmaps customized to your exam schedule.</p>
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-    if st.button("Launch Study Planner ↗", key="btn_f7", use_container_width=True, type="primary" if st.session_state.active_feature == "7" else "secondary"):
-        set_feature("7")
-
-with c8:
-    st.markdown(
-        """
-        <div class="feature-card" style="border-top: 3px solid #14B8A6;">
-            <div>
-                <div class="card-top">
-                    <div class="card-icon" style="background: rgba(20, 184, 166, 0.15); color:#2DD4BF;">🌐</div>
-                    <span class="card-number">08</span>
-                </div>
-                <h4 class="card-title">Translation & ELI5</h4>
-                <p class="card-desc">Translate study text into 20+ languages with Explain-Like-I'm-5 adaptation.</p>
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-    if st.button("Launch Translator ↗", key="btn_f8", use_container_width=True, type="primary" if st.session_state.active_feature == "8" else "secondary"):
-        set_feature("8")
+d5, d6, d7, d8 = st.columns(4)
+with d5:
+    if st.button("📝 5. Cornell Notes", use_container_width=True, type="primary" if st.session_state.active_tool == "5" else "secondary"):
+        set_tool("5")
+with d6:
+    if st.button("🧠 6. MCQ Practice", use_container_width=True, type="primary" if st.session_state.active_tool == "6" else "secondary"):
+        set_tool("6")
+with d7:
+    if st.button("📅 7. Study Planner", use_container_width=True, type="primary" if st.session_state.active_tool == "7" else "secondary"):
+        set_tool("7")
+with d8:
+    if st.button("🌐 8. Translator & ELI5", use_container_width=True, type="primary" if st.session_state.active_tool == "8" else "secondary"):
+        set_tool("8")
 
 # ============================================================
-# ACTIVE FEATURE WORKBENCH
+# ACTIVE FROSTED WORKBENCH CONTAINER
 # ============================================================
-st.markdown('<div class="workbench-panel">', unsafe_allow_html=True)
+st.markdown('<div class="haven-workbench">', unsafe_allow_html=True)
 
 # ------------------------------------------------------------
-# 1. OFFLINE AI CHATBOT
+# 1. AI CHATBOT
 # ------------------------------------------------------------
-if st.session_state.active_feature == "1":
+if st.session_state.active_tool == "1":
     st.markdown(
         """
-        <div class="workbench-title">🤖 Feature 01: Conversational AI Copilot</div>
-        <p class="workbench-desc">Real-time token streaming intelligence for deep problem solving, code generation, and study reasoning.</p>
+        <div class="workbench-title">🤖 01. Academic AI Copilot</div>
+        <p class="workbench-desc">Streaming masterclass explanations for coding, mathematics, essay structure, and deep scientific inquiries.</p>
         """,
         unsafe_allow_html=True,
     )
@@ -629,8 +433,8 @@ if st.session_state.active_feature == "1":
         st.markdown(
             """
             <div class="chat-ai">
-                👋 <b>Hello! I am your AI Academic Copilot.</b><br>
-                Ask me anything — write code, solve math derivations, analyze essay logic, or review study concepts.
+                👋 <b>Hello! I am your Academic Copilot.</b><br>
+                Ask me anything — explore algorithms, solve math derivations, review research papers, or prepare for exams.
             </div>
             """,
             unsafe_allow_html=True,
@@ -638,17 +442,17 @@ if st.session_state.active_feature == "1":
 
     for turn in st.session_state.chat_history:
         css = "chat-user" if turn["role"] == "user" else "chat-ai"
-        sender = "👤 You" if turn["role"] == "user" else "✦ Karpom AI"
-        st.markdown(f'<div class="{css}"><div style="font-size:0.75rem; font-weight:700; opacity:0.85; margin-bottom:5px;">{sender}</div><div>{turn["content"]}</div></div>', unsafe_allow_html=True)
+        sender = "👤 You" if turn["role"] == "user" else "🌸 Karpom AI"
+        st.markdown(f'<div class="{css}"><div style="font-size:0.74rem; font-weight:700; opacity:0.85; margin-bottom:4px;">{sender}</div><div>{turn["content"]}</div></div>', unsafe_allow_html=True)
 
-    user_input = st.chat_input("Ask a question, enter code, or paste formulas...")
+    user_input = st.chat_input("Ask any question (e.g. About Python, Explain Fourier Transforms)...")
     if user_input:
         st.session_state.chat_history.append({"role": "user", "content": user_input})
         save_chat_message(st.session_state.session_id, "user", user_input)
 
-        st.markdown(f'<div class="chat-user"><div style="font-size:0.75rem; font-weight:700; opacity:0.85; margin-bottom:5px;">👤 You</div><div>{user_input}</div></div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="chat-user"><div style="font-size:0.74rem; font-weight:700; opacity:0.85; margin-bottom:4px;">👤 You</div><div>{user_input}</div></div>', unsafe_allow_html=True)
         with st.container():
-            st.markdown('<div style="font-size:0.75rem; color:#818CF8; font-weight:800; margin:10px 0 4px;">✦ Karpom AI</div>', unsafe_allow_html=True)
+            st.markdown('<div style="font-size:0.75rem; color:#0F172A; font-weight:800; margin:10px 0 4px;">🌸 Karpom AI</div>', unsafe_allow_html=True)
             stream_gen = stream_answer(user_input, st.session_state.chat_history[:-1])
             full_ai = st.write_stream(stream_gen)
 
@@ -658,7 +462,7 @@ if st.session_state.active_feature == "1":
 
     if st.session_state.chat_history:
         st.write("")
-        if st.button("🗑 Reset Chat Session", type="secondary"):
+        if st.button("🗑 Clear Session History"):
             st.session_state.chat_history = []
             st.session_state.session_id = str(uuid.uuid4())
             st.rerun()
@@ -666,23 +470,23 @@ if st.session_state.active_feature == "1":
 # ------------------------------------------------------------
 # 2. VOICE QUESTION ASKING
 # ------------------------------------------------------------
-elif st.session_state.active_feature == "2":
+elif st.session_state.active_tool == "2":
     st.markdown(
         """
-        <div class="workbench-title">🎤 Feature 02: Voice Question Asking</div>
-        <p class="workbench-desc">Speak your question directly. Whisper transcribes your voice and generates an instant step-by-step solution.</p>
+        <div class="workbench-title">🎤 02. Voice Question Asking</div>
+        <p class="workbench-desc">Speak your question naturally. Built-in speech recognition transcribes your voice and generates an instant step-by-step solution.</p>
         """,
         unsafe_allow_html=True,
     )
 
-    audio_val = st.audio_input("Record Audio Question (Click mic to record)")
+    audio_val = st.audio_input("Record Audio Question (Click microphone to speak)")
     if audio_val:
-        with st.spinner("🎙️ Transcribing voice query with Whisper AI..."):
+        with st.spinner("🎙️ Transcribing voice query..."):
             transcribed_text = transcribe_audio(audio_val.getvalue())
             st.info(f"📝 **Transcribed Question:** {transcribed_text}")
             
-            if st.button("🚀 Answer Transcribed Question", type="primary"):
-                with st.spinner("Computing solution..."):
+            if st.button("🚀 Answer Voice Question", type="primary"):
+                with st.spinner("Formulating solution..."):
                     stream_gen = stream_answer(transcribed_text, [])
                     full_res = ""
                     for token in stream_gen:
@@ -692,11 +496,11 @@ elif st.session_state.active_feature == "2":
 # ------------------------------------------------------------
 # 3. IMAGE QUESTION SOLVING
 # ------------------------------------------------------------
-elif st.session_state.active_feature == "3":
+elif st.session_state.active_tool == "3":
     st.markdown(
         """
-        <div class="workbench-title">📷 Feature 03: Vision Homework & Diagram Solver</div>
-        <p class="workbench-desc">Upload an image or snap a photo of a math problem, circuit diagram, or textbook question.</p>
+        <div class="workbench-title">📷 03. Vision Homework & Diagram Solver</div>
+        <p class="workbench-desc">Upload an image or take a photo of a textbook, circuit diagram, math derivation, or book cover.</p>
         """,
         unsafe_allow_html=True,
     )
@@ -714,23 +518,23 @@ elif st.session_state.active_feature == "3":
         if c_file:
             img_data = c_file.getvalue()
 
-    custom_instr = st.text_input("Additional guidance (Optional):", placeholder="e.g. Solve step-by-step and show the final numerical result")
+    custom_instr = st.text_input("Additional instructions (Optional):", placeholder="e.g. Solve step-by-step or teach the core concepts")
 
     if st.button("✨ Solve with Vision AI", type="primary"):
         if not img_data:
             st.warning("Please upload an image or capture a photo first.")
         else:
-            with st.spinner("🔮 Neural Vision analyzing image & computing solution..."):
+            with st.spinner("🔮 Neural Vision analyzing image & synthesizing breakdown..."):
                 sol = solve_image_question(img_data, custom_instr)
-                st.markdown(f'<div class="chat-ai" style="max-width:100%;"><h4 style="color:#FB7185; margin:0 0 10px;">📝 Step-by-Step Solution</h4><div style="line-height:1.7;">{sol}</div></div>', unsafe_allow_html=True)
+                st.markdown(f'<div class="chat-ai" style="max-width:100%;"><h4 style="color:#0F172A; margin:0 0 10px;">📝 Step-by-Step Solution</h4><div style="line-height:1.7;">{sol}</div></div>', unsafe_allow_html=True)
 
 # ------------------------------------------------------------
 # 4. PDF / NOTES Q&A
 # ------------------------------------------------------------
-elif st.session_state.active_feature == "4":
+elif st.session_state.active_tool == "4":
     st.markdown(
         """
-        <div class="workbench-title">📄 Feature 04: Document Q&A & Research RAG</div>
+        <div class="workbench-title">📄 04. Document Q&A & Research RAG</div>
         <p class="workbench-desc">Upload study notes, research papers, or syllabus documents to ask targeted questions.</p>
         """,
         unsafe_allow_html=True,
@@ -746,15 +550,15 @@ elif st.session_state.active_feature == "4":
             if q_input.strip():
                 with st.spinner("Analyzing document context..."):
                     ans = ask_document(doc_raw, q_input)
-                    st.markdown(f'<div class="chat-ai" style="max-width:100%;"><h4 style="color:#34D399; margin:0 0 10px;">💡 Document Answer</h4><p style="line-height:1.7; font-size:0.98rem; margin:0;">{ans}</p></div>', unsafe_allow_html=True)
+                    st.markdown(f'<div class="chat-ai" style="max-width:100%;"><h4 style="color:#0F172A; margin:0 0 10px;">💡 Document Answer</h4><p style="line-height:1.7; font-size:0.98rem; margin:0;">{ans}</p></div>', unsafe_allow_html=True)
 
 # ------------------------------------------------------------
-# 5. AI NOTES GENERATOR
+# 5. AI CORNELL NOTES GENERATOR
 # ------------------------------------------------------------
-elif st.session_state.active_feature == "5":
+elif st.session_state.active_tool == "5":
     st.markdown(
         """
-        <div class="workbench-title">📝 Feature 05: AI Cornell Notes Generator</div>
+        <div class="workbench-title">📝 05. AI Cornell Notes Generator</div>
         <p class="workbench-desc">Convert raw lecture transcripts into high-yield Cornell study guides with flashcard recall cues.</p>
         """,
         unsafe_allow_html=True,
@@ -782,10 +586,10 @@ elif st.session_state.active_feature == "5":
 # ------------------------------------------------------------
 # 6. MCQ & QUIZ GENERATOR
 # ------------------------------------------------------------
-elif st.session_state.active_feature == "6":
+elif st.session_state.active_tool == "6":
     st.markdown(
         """
-        <div class="workbench-title">🧠 Feature 06: MCQ & Practice Exam Generator</div>
+        <div class="workbench-title">🧠 06. MCQ & Practice Exam Generator</div>
         <p class="workbench-desc">Generate customized multiple-choice practice exams with answer keys and explanations from any topic.</p>
         """,
         unsafe_allow_html=True,
@@ -793,7 +597,7 @@ elif st.session_state.active_feature == "6":
 
     c1, c2, c3 = st.columns([2, 1, 1])
     with c1:
-        q_topic = st.text_input("Quiz Topic or Subject:", placeholder="e.g. Graph Algorithms & Shortest Path")
+        q_topic = st.text_input("Quiz Topic or Subject:", placeholder="e.g. Graph Algorithms & Binary Trees")
     with c2:
         num_q = st.number_input("Number of MCQs:", min_value=3, max_value=20, value=5)
     with c3:
@@ -810,10 +614,10 @@ elif st.session_state.active_feature == "6":
 # ------------------------------------------------------------
 # 7. PERSONALIZED STUDY PLANNER
 # ------------------------------------------------------------
-elif st.session_state.active_feature == "7":
+elif st.session_state.active_tool == "7":
     st.markdown(
         """
-        <div class="workbench-title">📅 Feature 07: Personalized Study Planner</div>
+        <div class="workbench-title">📅 07. Personalized Study Planner</div>
         <p class="workbench-desc">Build a day-by-day milestone roadmap based on your exam date, subjects, and daily study hours.</p>
         """,
         unsafe_allow_html=True,
@@ -821,7 +625,7 @@ elif st.session_state.active_feature == "7":
 
     p_c1, p_c2 = st.columns(2)
     with p_c1:
-        subj_list = st.text_area("Subjects / Syllabus Topics:", placeholder="e.g. Database Systems, Machine Learning Theory, Operating Systems")
+        subj_list = st.text_area("Subjects / Syllabus Topics:", placeholder="e.g. Database Systems, Operating Systems, Machine Learning")
         target_g = st.text_input("Target Goal:", placeholder="e.g. Score 90%+ in finals, Pass certification")
     with p_c2:
         days_remain = st.number_input("Days Remaining until Exam:", min_value=1, max_value=90, value=14)
@@ -838,10 +642,10 @@ elif st.session_state.active_feature == "7":
 # ------------------------------------------------------------
 # 8. MULTILINGUAL TRANSLATION + SIMPLIFICATION
 # ------------------------------------------------------------
-elif st.session_state.active_feature == "8":
+elif st.session_state.active_tool == "8":
     st.markdown(
         """
-        <div class="workbench-title">🌐 Feature 08: Multilingual Translation & ELI5 Simplifier</div>
+        <div class="workbench-title">🌐 08. Multilingual Translation & ELI5 Simplifier</div>
         <p class="workbench-desc">Translate complex academic theory into 20+ languages and adjust the explanation complexity.</p>
         """,
         unsafe_allow_html=True,

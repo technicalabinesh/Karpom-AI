@@ -30,7 +30,7 @@ load_dotenv()
 
 st.set_page_config(
     page_title="Karpom AI | Next-Gen Academic Intelligence",
-    page_icon="✦",
+    page_icon="🌊",
     layout="wide",
     initial_sidebar_state="collapsed",
 )
@@ -71,7 +71,7 @@ def load_chat_history(session_id: str):
     return []
 
 # ============================================================
-# DRIBBLE-GRADE MATTE DARK DESIGN SYSTEM
+# DRIBBBLE-GRADE MATTE DARK DESIGN SYSTEM WITH CENTERED TEXT
 # ============================================================
 DRIBBBLE_SAAS_CSS = """
 <style>
@@ -128,7 +128,7 @@ html, body, [class*="css"] {
     letter-spacing: -0.03em;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     color: #FFFFFF !important;
 }
 
@@ -153,16 +153,21 @@ html, body, [class*="css"] {
     box-shadow: 0 0 8px #4ADE80;
 }
 
-/* Hero Typography */
+/* Hero Typography - Centered */
 .hero-wrapper {
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     padding: 10px 0 36px;
+    margin: 0 auto;
 }
 
 .hero-pill-badge {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     background: rgba(255, 255, 255, 0.06);
     border: 1px solid rgba(255, 255, 255, 0.12);
     color: #F8FAFC !important;
@@ -180,6 +185,7 @@ html, body, [class*="css"] {
     line-height: 1.15;
     color: #FFFFFF !important;
     margin: 0 0 14px;
+    text-align: center;
 }
 
 .hero-italic {
@@ -191,9 +197,10 @@ html, body, [class*="css"] {
 .hero-subtitle {
     font-size: 1.05rem;
     color: var(--text-dim) !important;
-    max-width: 680px;
+    max-width: 740px;
     margin: 0 auto;
-    line-height: 1.6;
+    line-height: 1.65;
+    text-align: center !important;
 }
 
 /* Section Header */
@@ -387,6 +394,28 @@ div[data-testid="stButton"] > button[kind="primary"] {
 """
 st.markdown(DRIBBBLE_SAAS_CSS, unsafe_allow_html=True)
 
+# Custom Layered Wave Logo SVG
+WAVE_LOGO_SVG = """
+<svg width="26" height="26" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="border-radius: 8px; vertical-align: middle; box-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+    <rect width="32" height="32" rx="8" fill="#18181E"/>
+    <path d="M4 22C8 18 12 26 16 22C20 18 24 26 28 22V28H4V22Z" fill="#C2410C"/>
+    <path d="M4 17C8 13 12 21 16 17C20 13 24 21 28 17V24C24 28 20 20 16 24C12 28 8 20 4 24V17Z" fill="#D97706"/>
+    <path d="M4 12C8 8 12 16 16 12C20 8 24 16 28 12V19C24 23 20 15 16 19C12 23 8 15 4 19V12Z" fill="#E2D4B7"/>
+    <path d="M4 7C8 3 12 11 16 7C20 3 24 11 28 7V14C24 18 20 10 16 14C12 18 8 10 4 14V7Z" fill="#2E5A6B"/>
+    <path d="M4 4H28V9C24 13 20 5 16 9C12 13 8 5 4 9V4Z" fill="#1C2B36"/>
+</svg>
+"""
+
+WAVE_ICON_MINI = """
+<svg width="16" height="16" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="border-radius: 4px; vertical-align: middle;">
+    <rect width="32" height="32" rx="6" fill="#18181E"/>
+    <path d="M4 22C8 18 12 26 16 22C20 18 24 26 28 22V28H4V22Z" fill="#C2410C"/>
+    <path d="M4 17C8 13 12 21 16 17C20 13 24 21 28 17V24C24 28 20 20 16 24C12 28 8 20 4 24V17Z" fill="#D97706"/>
+    <path d="M4 12C8 8 12 16 16 12C20 8 24 16 28 12V19C24 23 20 15 16 19C12 23 8 15 4 19V12Z" fill="#E2D4B7"/>
+    <path d="M4 7C8 3 12 11 16 7C20 3 24 11 28 7V14C24 18 20 10 16 14C12 18 8 10 4 14V7Z" fill="#2E5A6B"/>
+</svg>
+"""
+
 # ============================================================
 # STATE INITIALIZATION
 # ============================================================
@@ -405,7 +434,7 @@ def set_feature(num: str):
     st.rerun()
 
 # ============================================================
-# FLOATING PILL NAVBAR
+# FLOATING PILL NAVBAR WITH CUSTOM WAVE LOGO
 # ============================================================
 ai_connected = chat_ai_available()
 status_html = (
@@ -418,7 +447,7 @@ st.markdown(
     f"""
     <div class="nav-pill-container">
         <div class="brand-title">
-            <span>✦</span> Karpom AI
+            {WAVE_LOGO_SVG} Karpom AI
         </div>
         <div>
             {status_html}
@@ -429,12 +458,12 @@ st.markdown(
 )
 
 # ============================================================
-# HERO HEADER SECTION (DRIBBLE STYLE)
+# HERO HEADER SECTION - CENTERED
 # ============================================================
 st.markdown(
-    """
+    f"""
     <div class="hero-wrapper">
-        <div class="hero-pill-badge">✦ Academic Intelligence Suite — 8 Powerful Tools</div>
+        <div class="hero-pill-badge">{WAVE_ICON_MINI} Academic Intelligence Suite — 8 Powerful Tools</div>
         <h1 class="hero-headline">Build Your Mind,<br><span class="hero-italic">Accelerate</span> Your Knowledge</h1>
         <p class="hero-subtitle">
             An elite cognitive space engineered for students and researchers. Solve complex homework with Vision AI, 
@@ -448,7 +477,7 @@ st.markdown(
 # ============================================================
 # 8-FEATURE VISUAL CARDS DECK (4x2 GRID)
 # ============================================================
-st.markdown('<div class="section-tag"><span>✦</span> SELECT A FEATURE TO LAUNCH WORKBENCH</div>', unsafe_allow_html=True)
+st.markdown(f'<div class="section-tag">{WAVE_ICON_MINI} SELECT A FEATURE TO LAUNCH WORKBENCH</div>', unsafe_allow_html=True)
 
 # Row 1 (Cards 1 to 4)
 c1, c2, c3, c4 = st.columns(4)
@@ -482,7 +511,7 @@ with c2:
                     <span class="card-number">02</span>
                 </div>
                 <h4 class="card-title">Voice Asking</h4>
-                <p class="card-desc">Whisper speech-to-text question solving with instant audio transcription.</p>
+                <p class="card-desc">Speech-to-text question solving with instant audio transcription.</p>
             </div>
         </div>
         """,
@@ -501,7 +530,7 @@ with c3:
                     <span class="card-number">03</span>
                 </div>
                 <h4 class="card-title">Image Question Solver</h4>
-                <p class="card-desc">Vision AI step-by-step solver for handwritten math, diagrams, & test photos.</p>
+                <p class="card-desc">Vision AI step-by-step solver for handwritten math, diagrams, & book covers.</p>
             </div>
         </div>
         """,
@@ -638,7 +667,7 @@ if st.session_state.active_feature == "1":
 
     for turn in st.session_state.chat_history:
         css = "chat-user" if turn["role"] == "user" else "chat-ai"
-        sender = "👤 You" if turn["role"] == "user" else "✦ Karpom AI"
+        sender = "👤 You" if turn["role"] == "user" else "Karpom AI"
         st.markdown(f'<div class="{css}"><div style="font-size:0.75rem; font-weight:700; opacity:0.85; margin-bottom:5px;">{sender}</div><div>{turn["content"]}</div></div>', unsafe_allow_html=True)
 
     user_input = st.chat_input("Ask a question, enter code, or paste formulas...")
@@ -648,7 +677,7 @@ if st.session_state.active_feature == "1":
 
         st.markdown(f'<div class="chat-user"><div style="font-size:0.75rem; font-weight:700; opacity:0.85; margin-bottom:5px;">👤 You</div><div>{user_input}</div></div>', unsafe_allow_html=True)
         with st.container():
-            st.markdown('<div style="font-size:0.75rem; color:#818CF8; font-weight:800; margin:10px 0 4px;">✦ Karpom AI</div>', unsafe_allow_html=True)
+            st.markdown('<div style="font-size:0.75rem; color:#818CF8; font-weight:800; margin:10px 0 4px;">Karpom AI</div>', unsafe_allow_html=True)
             stream_gen = stream_answer(user_input, st.session_state.chat_history[:-1])
             full_ai = st.write_stream(stream_gen)
 
@@ -670,14 +699,14 @@ elif st.session_state.active_feature == "2":
     st.markdown(
         """
         <div class="workbench-title">🎤 Feature 02: Voice Question Asking</div>
-        <p class="workbench-desc">Speak your question directly. Whisper transcribes your voice and generates an instant step-by-step solution.</p>
+        <p class="workbench-desc">Speak your question directly. Speech recognition transcribes your voice and generates an instant step-by-step solution.</p>
         """,
         unsafe_allow_html=True,
     )
 
     audio_val = st.audio_input("Record Audio Question (Click mic to record)")
     if audio_val:
-        with st.spinner("🎙️ Transcribing voice query with Whisper AI..."):
+        with st.spinner("🎙️ Transcribing voice query..."):
             transcribed_text = transcribe_audio(audio_val.getvalue())
             st.info(f"📝 **Transcribed Question:** {transcribed_text}")
             
@@ -696,7 +725,7 @@ elif st.session_state.active_feature == "3":
     st.markdown(
         """
         <div class="workbench-title">📷 Feature 03: Vision Homework & Diagram Solver</div>
-        <p class="workbench-desc">Upload an image or snap a photo of a math problem, circuit diagram, or textbook question.</p>
+        <p class="workbench-desc">Upload an image or snap a photo of a math problem, circuit diagram, textbook page, or book cover.</p>
         """,
         unsafe_allow_html=True,
     )
@@ -714,7 +743,7 @@ elif st.session_state.active_feature == "3":
         if c_file:
             img_data = c_file.getvalue()
 
-    custom_instr = st.text_input("Additional guidance (Optional):", placeholder="e.g. Solve step-by-step and show the final numerical result")
+    custom_instr = st.text_input("Additional guidance (Optional):", placeholder="e.g. Solve step-by-step or teach the core concepts")
 
     if st.button("✨ Solve with Vision AI", type="primary"):
         if not img_data:
@@ -868,4 +897,3 @@ elif st.session_state.active_feature == "8":
                 st.markdown(f'<div class="chat-ai" style="max-width:100%;">{res_trans}</div>', unsafe_allow_html=True)
 
 st.markdown('</div>', unsafe_allow_html=True)
-

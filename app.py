@@ -1,5 +1,5 @@
 """
-Karpom AI - Next-Gen Haven Alpine Glass Academic Platform
+Karpom AI - Next-Gen Apple VisionOS & Creatie Glass Design
 Run:
     streamlit run app.py
 """
@@ -29,7 +29,7 @@ from study_tools import (
 load_dotenv()
 
 st.set_page_config(
-    page_title="Karpom AI | Study with ease.",
+    page_title="Karpom AI | Creatie VisionOS",
     page_icon="🌸",
     layout="wide",
     initial_sidebar_state="collapsed",
@@ -71,201 +71,216 @@ def load_chat_history(session_id: str):
     return []
 
 # ============================================================
-# HAVEN ALPINE MEADOW DESIGN SYSTEM (INSPIRED BY REFERENCE)
+# CREATIE VISIONOS GLASS & MEADOW CSS
 # ============================================================
-HAVEN_CSS = """
+CREATIE_CSS = """
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800&family=JetBrains+Mono:wght@500;700&display=swap');
 
 :root {
-    --text-main: #0F172A;
-    --text-muted: #475569;
-    --glass-pill: rgba(255, 255, 255, 0.88);
-    --glass-card: rgba(255, 255, 255, 0.92);
-    --glass-border: rgba(255, 255, 255, 0.95);
-    --shadow-haven: 0 20px 40px -10px rgba(15, 23, 42, 0.12), 0 0 1px 1px rgba(255, 255, 255, 0.9) inset;
+    --glass-bg: rgba(255, 255, 255, 0.42);
+    --glass-card: rgba(255, 255, 255, 0.72);
+    --glass-border: rgba(255, 255, 255, 0.65);
+    --glass-shadow: 0 20px 50px rgba(0, 0, 0, 0.12), 0 0 1px 1px rgba(255, 255, 255, 0.8) inset;
+    --text-dark: #0F172A;
 }
 
-/* Global Font & Fullscreen Alpine Meadow Wallpaper */
+/* Landscape Meadow Wallpaper */
 html, body, [class*="css"] {
     font-family: 'Plus Jakarta Sans', sans-serif !important;
-    color: var(--text-main) !important;
+    color: var(--text-dark) !important;
 }
 
 .stApp {
     background: 
-        radial-gradient(ellipse at 50% 15%, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 60%),
-        url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2070&auto=format&fit=crop") no-repeat center center fixed !important;
+        radial-gradient(circle at 50% 25%, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 45%),
+        url("https://images.unsplash.com/photo-1470240731273-7821a6eeb6bd?q=80&w=2070&auto=format&fit=crop") no-repeat center center fixed !important;
     background-size: cover !important;
 }
 
 .main .block-container {
-    max-width: 1180px;
+    max-width: 1220px;
     padding: 1.5rem 1.5rem 5rem;
 }
 
-/* Floating Top Haven Pill Nav */
-.haven-navbar {
-    background: var(--glass-pill);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border: 1px solid var(--glass-border);
-    border-radius: 9999px;
-    padding: 10px 26px;
+/* Top Mini Header */
+.creatie-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
-    margin: 0 auto 36px;
-    max-width: 760px;
+    margin-bottom: 24px;
 }
 
-.haven-brand {
+.creatie-brand {
     font-size: 1.15rem;
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #0F172A !important;
+    font-weight: 900;
+    letter-spacing: 0.18em;
+    color: #FFFFFF !important;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    text-transform: uppercase;
 }
 
-.status-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 4px 14px;
-    border-radius: 9999px;
-    font-size: 0.76rem;
-    font-weight: 700;
-    background: #F0FDF4;
-    color: #15803D !important;
-    border: 1px solid #BBF7D0;
+/* Profile Glass Badge */
+.profile-glass {
+    background: rgba(255, 255, 255, 0.28);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 18px;
+    padding: 12px 18px;
+    box-shadow: var(--glass-shadow);
+    color: #FFFFFF !important;
+    max-width: 320px;
 }
 
-.status-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background-color: #22C55E;
-}
+.profile-glass * { color: #FFFFFF !important; }
 
-/* Hero Section Typography */
-.haven-hero {
-    text-align: center;
-    padding: 10px 0 28px;
-}
-
-.hero-pill-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(16px);
-    border: 1px solid #FFFFFF;
-    color: #334155 !important;
-    padding: 6px 18px;
-    border-radius: 9999px;
-    font-size: 0.82rem;
-    font-weight: 600;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
-    margin-bottom: 20px;
-}
-
-.haven-headline {
-    font-size: 3.8rem;
+/* Giant Creatie Hero Title */
+.hero-giant-title {
+    font-size: 4.2rem;
     font-weight: 900;
     letter-spacing: -0.04em;
-    line-height: 1.05;
+    line-height: 1.02;
+    color: #FFFFFF !important;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    text-transform: uppercase;
+    margin: 20px 0 24px;
+    position: relative;
+    display: inline-block;
+}
+
+/* Floating Sticker Badges */
+.sticker {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 10px;
+    font-weight: 800;
+    font-size: 0.85rem;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.18);
+    position: relative;
+    z-index: 10;
+    vertical-align: middle;
+    margin: 0 6px;
+}
+
+.sticker-pink {
+    background: #F472B6;
+    color: #FFFFFF !important;
+    transform: rotate(3deg);
+}
+
+.sticker-blue {
+    background: #38BDF8;
+    color: #FFFFFF !important;
+    transform: rotate(-4deg);
+}
+
+.sticker-purple {
+    background: #A78BFA;
+    color: #FFFFFF !important;
+    transform: rotate(-2deg);
+}
+
+.sticker-yellow {
+    background: #FBBF24;
     color: #0F172A !important;
-    margin: 0 0 14px;
-    text-shadow: 0 2px 20px rgba(255, 255, 255, 0.8);
+    transform: rotate(4deg);
 }
 
-.haven-subtitle {
-    font-size: 1.15rem;
-    color: #334155 !important;
-    max-width: 580px;
-    margin: 0 auto 24px;
-    line-height: 1.55;
-    font-weight: 500;
+/* Floating macOS / visionOS App Dock */
+.vision-dock {
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 26px;
+    padding: 10px 18px;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15), 0 0 1px 1px rgba(255, 255, 255, 0.9) inset;
+    margin: 10px 0 26px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
 }
 
-/* 8-Feature Interactive Floating Dock */
+/* Dock Icon Button */
 div[data-testid="stHorizontalBlock"] div[data-testid="stButton"] > button {
-    background: rgba(255, 255, 255, 0.9) !important;
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.95) !important;
+    background: rgba(255, 255, 255, 0.75) !important;
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.9) !important;
     color: #0F172A !important;
-    border-radius: 9999px !important;
-    font-weight: 700 !important;
+    border-radius: 16px !important;
+    font-weight: 800 !important;
     font-size: 0.86rem !important;
-    min-height: 44px !important;
-    padding: 8px 16px !important;
-    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05) !important;
+    min-height: 48px !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06) !important;
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 div[data-testid="stHorizontalBlock"] div[data-testid="stButton"] > button:hover {
     background: #FFFFFF !important;
-    transform: translateY(-3px) scale(1.02) !important;
-    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12) !important;
+    transform: translateY(-4px) scale(1.04) !important;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15) !important;
 }
 
-/* Active Frosted Glass Workbench */
-.haven-workbench {
-    background: var(--glass-card) !important;
+/* Active Workbench Window */
+.workbench-window {
+    background: rgba(255, 255, 255, 0.82) !important;
     backdrop-filter: blur(32px) saturate(180%);
     -webkit-backdrop-filter: blur(32px) saturate(180%);
-    border: 1.5px solid var(--glass-border) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.9) !important;
     border-radius: 28px;
-    padding: 32px 36px;
-    margin-top: 18px;
-    box-shadow: var(--shadow-haven);
+    padding: 32px;
+    box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.18), 0 0 1px 1px rgba(255, 255, 255, 1) inset;
+    margin-top: 14px;
 }
 
-.workbench-title {
-    font-size: 1.45rem;
-    font-weight: 800;
+.window-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+.dot-red { background: #FF5F56; }
+.dot-yellow { background: #FFBD2E; }
+.dot-green { background: #27C93F; }
+
+.window-title {
+    font-size: 1.5rem;
+    font-weight: 900;
     letter-spacing: -0.03em;
     color: #0F172A;
-    margin: 0 0 4px;
+    margin: 0;
 }
 
-.workbench-desc {
-    font-size: 0.94rem;
-    color: #64748B;
-    margin: 0 0 20px;
-    line-height: 1.5;
-}
-
-/* Chat Input (Haven Minimalist Style) */
+/* Chat Input Bar */
 div[data-testid="stChatInput"] { background: transparent !important; }
 div[data-testid="stChatInput"] > div {
     background: #FFFFFF !important;
     border: 1.5px solid #CBD5E1 !important;
-    border-radius: 9999px !important;
-    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06) !important;
-    padding: 4px 10px !important;
+    border-radius: 18px !important;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08) !important;
 }
 
 div[data-testid="stChatInput"] textarea {
     color: #0F172A !important;
     -webkit-text-fill-color: #0F172A !important;
-    font-size: 0.96rem !important;
 }
 
-/* Chat Message Bubbles */
+/* Chat Bubbles */
 .chat-user {
-    background: #0F172A !important;
+    background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%) !important;
     color: #FFFFFF !important;
     padding: 14px 18px;
     border-radius: 18px 18px 4px 18px;
     margin: 12px 0 12px auto;
     max-width: 80%;
     font-size: 0.95rem;
-    line-height: 1.55;
-    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.15);
+    box-shadow: 0 8px 20px rgba(79, 70, 229, 0.25);
 }
 .chat-user * { color: #FFFFFF !important; }
 
@@ -273,56 +288,30 @@ div[data-testid="stChatInput"] textarea {
     background: #FFFFFF !important;
     color: #0F172A !important;
     padding: 20px 24px;
-    border-radius: 18px 18px 18px 4px;
+    border-radius: 20px 20px 20px 4px;
     margin: 12px 0;
     max-width: 88%;
-    border: 1px solid #E2E8F0;
-    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
     font-size: 0.96rem;
     line-height: 1.7;
 }
-.chat-ai * { color: #0F172A !important; }
 
 /* Primary Action Button */
 div[data-testid="stButton"] > button[kind="primary"] {
-    background: #0F172A !important;
+    background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%) !important;
     color: #FFFFFF !important;
     border: none !important;
-    border-radius: 9999px !important;
-    font-weight: 700 !important;
-    padding: 10px 24px !important;
-    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.25) !important;
-    transition: all 0.2s ease !important;
-}
-
-div[data-testid="stButton"] > button[kind="primary"]:hover {
-    background: #1E293B !important;
-    transform: translateY(-2px) !important;
-    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.35) !important;
-}
-
-/* Clean Form Controls */
-div[data-testid="stTextInput"] input,
-div[data-testid="stTextArea"] textarea,
-div[data-testid="stNumberInput"] input,
-div[data-testid="stSelectbox"] div[data-baseweb="select"] {
-    background-color: #FFFFFF !important;
-    color: #0F172A !important;
-    -webkit-text-fill-color: #0F172A !important;
-    border: 1.5px solid #CBD5E1 !important;
     border-radius: 14px !important;
-}
-
-div[data-testid="stFileUploaderDropzone"] {
-    background: #F8FAFC !important;
-    border: 2px dashed #CBD5E1 !important;
-    border-radius: 18px !important;
+    font-weight: 800 !important;
+    padding: 12px 26px !important;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.25) !important;
 }
 
 #MainMenu, footer, header { visibility: hidden; }
 </style>
 """
-st.markdown(HAVEN_CSS, unsafe_allow_html=True)
+st.markdown(CREATIE_CSS, unsafe_allow_html=True)
 
 # ============================================================
 # STATE INITIALIZATION
@@ -342,23 +331,18 @@ def set_tool(num: str):
     st.rerun()
 
 # ============================================================
-# TOP FLOATING PILL NAVBAR (HAVEN STYLE)
+# TOP CREATIE HEADER & FLOATING GLASS PROFILE BADGE
 # ============================================================
 ai_connected = chat_ai_available()
-status_html = (
-    '<span class="status-badge"><span class="status-dot"></span>GPT-5.4 Active</span>'
-    if ai_connected
-    else '<span class="status-badge" style="color:#B45309 !important; background:#FFFBEB; border-color:#FDE68A;"><span class="status-dot" style="background:#F59E0B;"></span>Offline Mode</span>'
-)
+status_label = "⚡ Cloud AI Engine Active" if ai_connected else "● Offline Fallback Active"
 
 st.markdown(
     f"""
-    <div class="haven-navbar">
-        <div class="haven-brand">
-            <span>🌸</span> Karpom AI
-        </div>
-        <div>
-            {status_html}
+    <div class="creatie-top">
+        <div class="creatie-brand">✦ KARPOM AI</div>
+        <div class="profile-glass">
+            <div style="font-size:0.75rem; font-weight:800; opacity:0.9; margin-bottom:2px;">🟢 {status_label}</div>
+            <div style="font-size:0.88rem; font-weight:800;">ACADEMIC VISION WORKBENCH</div>
         </div>
     </div>
     """,
@@ -366,15 +350,18 @@ st.markdown(
 )
 
 # ============================================================
-# HAVEN HERO SECTION
+# GIANT HERO TITLE WITH FLOATING STICKERS (CREATIE STYLE)
 # ============================================================
 st.markdown(
     """
-    <div class="haven-hero">
-        <div class="hero-pill-badge">We just launched Karpom AI 2.0 🚀</div>
-        <h1 class="haven-headline">Study with ease.</h1>
-        <p class="haven-subtitle">
-            Learn smarter with AI that understands you.<br>So you can take a breath.
+    <div style="text-align: center; padding: 10px 0 20px;">
+        <div class="hero-giant-title">
+            STUDY THAT MAKES <span class="sticker sticker-blue">⚡ Vision AI</span><br>
+            MINDS <span class="sticker sticker-pink">🧠 MCQ Quiz</span> LOOK TWICE
+            <span class="sticker sticker-yellow">📝 Cornell Notes</span>
+        </div>
+        <p style="color:#FFFFFF; font-size:1.15rem; font-weight:700; text-shadow:0 2px 10px rgba(0,0,0,0.3); margin:0 auto; max-width:700px;">
+            — Not just answers. We make complex learning alive, intuitive, and unforgettable.
         </p>
     </div>
     """,
@@ -382,8 +369,10 @@ st.markdown(
 )
 
 # ============================================================
-# 8-FEATURE HAVEN FLOATING DOCK (CENTERED & INTERACTIVE)
+# MACOS / VISIONOS 8-FEATURE APP DOCK (CENTERED & INTERACTIVE)
 # ============================================================
+st.markdown("<div style='text-align:center; font-size:0.82rem; font-weight:800; color:#FFFFFF; text-transform:uppercase; letter-spacing:0.12em; margin-bottom:8px; text-shadow:0 2px 6px rgba(0,0,0,0.3);'>🍎 SELECT TOOL FROM DOCK</div>", unsafe_allow_html=True)
+
 d1, d2, d3, d4 = st.columns(4)
 with d1:
     if st.button("🤖 1. AI Chatbot", use_container_width=True, type="primary" if st.session_state.active_tool == "1" else "secondary"):
@@ -395,7 +384,7 @@ with d3:
     if st.button("📷 3. Vision Solver", use_container_width=True, type="primary" if st.session_state.active_tool == "3" else "secondary"):
         set_tool("3")
 with d4:
-    if st.button("📄 4. Document Q&A", use_container_width=True, type="primary" if st.session_state.active_tool == "4" else "secondary"):
+    if st.button("📄 4. PDF / Notes Q&A", use_container_width=True, type="primary" if st.session_state.active_tool == "4" else "secondary"):
         set_tool("4")
 
 d5, d6, d7, d8 = st.columns(4)
@@ -403,7 +392,7 @@ with d5:
     if st.button("📝 5. Cornell Notes", use_container_width=True, type="primary" if st.session_state.active_tool == "5" else "secondary"):
         set_tool("5")
 with d6:
-    if st.button("🧠 6. MCQ Practice", use_container_width=True, type="primary" if st.session_state.active_tool == "6" else "secondary"):
+    if st.button("🧠 6. MCQ Practice Exam", use_container_width=True, type="primary" if st.session_state.active_tool == "6" else "secondary"):
         set_tool("6")
 with d7:
     if st.button("📅 7. Study Planner", use_container_width=True, type="primary" if st.session_state.active_tool == "7" else "secondary"):
@@ -413,9 +402,9 @@ with d8:
         set_tool("8")
 
 # ============================================================
-# ACTIVE FROSTED WORKBENCH CONTAINER
+# ACTIVE FROSTED GLASS WORKBENCH WINDOW
 # ============================================================
-st.markdown('<div class="haven-workbench">', unsafe_allow_html=True)
+st.markdown('<div class="workbench-window">', unsafe_allow_html=True)
 
 # ------------------------------------------------------------
 # 1. AI CHATBOT
@@ -423,8 +412,10 @@ st.markdown('<div class="haven-workbench">', unsafe_allow_html=True)
 if st.session_state.active_tool == "1":
     st.markdown(
         """
-        <div class="workbench-title">🤖 01. Academic AI Copilot</div>
-        <p class="workbench-desc">Streaming masterclass explanations for coding, mathematics, essay structure, and deep scientific inquiries.</p>
+        <div class="window-header">
+            <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+            <div class="window-title">🤖 01. Offline & Cloud AI Copilot</div>
+        </div>
         """,
         unsafe_allow_html=True,
     )
@@ -433,8 +424,8 @@ if st.session_state.active_tool == "1":
         st.markdown(
             """
             <div class="chat-ai">
-                👋 <b>Hello! I am your Academic Copilot.</b><br>
-                Ask me anything — explore algorithms, solve math derivations, review research papers, or prepare for exams.
+                👋 <b>Hello! I am your AI Copilot.</b><br>
+                Ask me anything — solve math derivations, write code, analyze essay logic, or review study concepts.
             </div>
             """,
             unsafe_allow_html=True,
@@ -442,17 +433,17 @@ if st.session_state.active_tool == "1":
 
     for turn in st.session_state.chat_history:
         css = "chat-user" if turn["role"] == "user" else "chat-ai"
-        sender = "👤 You" if turn["role"] == "user" else "🌸 Karpom AI"
-        st.markdown(f'<div class="{css}"><div style="font-size:0.74rem; font-weight:700; opacity:0.85; margin-bottom:4px;">{sender}</div><div>{turn["content"]}</div></div>', unsafe_allow_html=True)
+        sender = "👤 You" if turn["role"] == "user" else "✦ Karpom AI"
+        st.markdown(f'<div class="{css}"><div style="font-size:0.75rem; font-weight:700; opacity:0.85; margin-bottom:4px;">{sender}</div><div>{turn["content"]}</div></div>', unsafe_allow_html=True)
 
-    user_input = st.chat_input("Ask any question (e.g. About Python, Explain Fourier Transforms)...")
+    user_input = st.chat_input("Ask a question, enter code, or paste formulas...")
     if user_input:
         st.session_state.chat_history.append({"role": "user", "content": user_input})
         save_chat_message(st.session_state.session_id, "user", user_input)
 
-        st.markdown(f'<div class="chat-user"><div style="font-size:0.74rem; font-weight:700; opacity:0.85; margin-bottom:4px;">👤 You</div><div>{user_input}</div></div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="chat-user"><div style="font-size:0.75rem; font-weight:700; opacity:0.85; margin-bottom:4px;">👤 You</div><div>{user_input}</div></div>', unsafe_allow_html=True)
         with st.container():
-            st.markdown('<div style="font-size:0.75rem; color:#0F172A; font-weight:800; margin:10px 0 4px;">🌸 Karpom AI</div>', unsafe_allow_html=True)
+            st.markdown('<div style="font-size:0.75rem; color:#4F46E5; font-weight:800; margin:10px 0 4px;">✦ Karpom AI</div>', unsafe_allow_html=True)
             stream_gen = stream_answer(user_input, st.session_state.chat_history[:-1])
             full_ai = st.write_stream(stream_gen)
 
@@ -473,20 +464,22 @@ if st.session_state.active_tool == "1":
 elif st.session_state.active_tool == "2":
     st.markdown(
         """
-        <div class="workbench-title">🎤 02. Voice Question Asking</div>
-        <p class="workbench-desc">Speak your question naturally. Built-in speech recognition transcribes your voice and generates an instant step-by-step solution.</p>
+        <div class="window-header">
+            <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+            <div class="window-title">🎤 02. Voice Question Asking (Whisper AI)</div>
+        </div>
         """,
         unsafe_allow_html=True,
     )
 
     audio_val = st.audio_input("Record Audio Question (Click microphone to speak)")
     if audio_val:
-        with st.spinner("🎙️ Transcribing voice query..."):
+        with st.spinner("🎙️ Transcribing voice query with Whisper AI..."):
             transcribed_text = transcribe_audio(audio_val.getvalue())
             st.info(f"📝 **Transcribed Question:** {transcribed_text}")
             
             if st.button("🚀 Answer Voice Question", type="primary"):
-                with st.spinner("Formulating solution..."):
+                with st.spinner("Formulating step-by-step solution..."):
                     stream_gen = stream_answer(transcribed_text, [])
                     full_res = ""
                     for token in stream_gen:
@@ -499,8 +492,10 @@ elif st.session_state.active_tool == "2":
 elif st.session_state.active_tool == "3":
     st.markdown(
         """
-        <div class="workbench-title">📷 03. Vision Homework & Diagram Solver</div>
-        <p class="workbench-desc">Upload an image or take a photo of a textbook, circuit diagram, math derivation, or book cover.</p>
+        <div class="window-header">
+            <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+            <div class="window-title">📷 03. Vision Homework & Diagram Solver</div>
+        </div>
         """,
         unsafe_allow_html=True,
     )
@@ -518,15 +513,15 @@ elif st.session_state.active_tool == "3":
         if c_file:
             img_data = c_file.getvalue()
 
-    custom_instr = st.text_input("Additional instructions (Optional):", placeholder="e.g. Solve step-by-step or teach the core concepts")
+    custom_instr = st.text_input("Additional instructions (Optional):", placeholder="e.g. Solve step-by-step and show the final numerical result")
 
     if st.button("✨ Solve with Vision AI", type="primary"):
         if not img_data:
             st.warning("Please upload an image or capture a photo first.")
         else:
-            with st.spinner("🔮 Neural Vision analyzing image & synthesizing breakdown..."):
+            with st.spinner("🔮 Neural Vision analyzing image & computing solution..."):
                 sol = solve_image_question(img_data, custom_instr)
-                st.markdown(f'<div class="chat-ai" style="max-width:100%;"><h4 style="color:#0F172A; margin:0 0 10px;">📝 Step-by-Step Solution</h4><div style="line-height:1.7;">{sol}</div></div>', unsafe_allow_html=True)
+                st.markdown(f'<div class="chat-ai" style="max-width:100%;"><h4 style="color:#F43F5E; margin:0 0 10px;">📝 Step-by-Step Solution</h4><div style="line-height:1.7;">{sol}</div></div>', unsafe_allow_html=True)
 
 # ------------------------------------------------------------
 # 4. PDF / NOTES Q&A
@@ -534,8 +529,10 @@ elif st.session_state.active_tool == "3":
 elif st.session_state.active_tool == "4":
     st.markdown(
         """
-        <div class="workbench-title">📄 04. Document Q&A & Research RAG</div>
-        <p class="workbench-desc">Upload study notes, research papers, or syllabus documents to ask targeted questions.</p>
+        <div class="window-header">
+            <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+            <div class="window-title">📄 04. Document Q&A & Research RAG</div>
+        </div>
         """,
         unsafe_allow_html=True,
     )
@@ -550,7 +547,7 @@ elif st.session_state.active_tool == "4":
             if q_input.strip():
                 with st.spinner("Analyzing document context..."):
                     ans = ask_document(doc_raw, q_input)
-                    st.markdown(f'<div class="chat-ai" style="max-width:100%;"><h4 style="color:#0F172A; margin:0 0 10px;">💡 Document Answer</h4><p style="line-height:1.7; font-size:0.98rem; margin:0;">{ans}</p></div>', unsafe_allow_html=True)
+                    st.markdown(f'<div class="chat-ai" style="max-width:100%;"><h4 style="color:#10B981; margin:0 0 10px;">💡 Document Answer</h4><p style="line-height:1.7; font-size:0.98rem; margin:0;">{ans}</p></div>', unsafe_allow_html=True)
 
 # ------------------------------------------------------------
 # 5. AI CORNELL NOTES GENERATOR
@@ -558,8 +555,10 @@ elif st.session_state.active_tool == "4":
 elif st.session_state.active_tool == "5":
     st.markdown(
         """
-        <div class="workbench-title">📝 05. AI Cornell Notes Generator</div>
-        <p class="workbench-desc">Convert raw lecture transcripts into high-yield Cornell study guides with flashcard recall cues.</p>
+        <div class="window-header">
+            <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+            <div class="window-title">📝 05. AI Cornell Notes Generator</div>
+        </div>
         """,
         unsafe_allow_html=True,
     )
@@ -589,8 +588,10 @@ elif st.session_state.active_tool == "5":
 elif st.session_state.active_tool == "6":
     st.markdown(
         """
-        <div class="workbench-title">🧠 06. MCQ & Practice Exam Generator</div>
-        <p class="workbench-desc">Generate customized multiple-choice practice exams with answer keys and explanations from any topic.</p>
+        <div class="window-header">
+            <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+            <div class="window-title">🧠 06. MCQ & Practice Exam Generator</div>
+        </div>
         """,
         unsafe_allow_html=True,
     )
@@ -617,8 +618,10 @@ elif st.session_state.active_tool == "6":
 elif st.session_state.active_tool == "7":
     st.markdown(
         """
-        <div class="workbench-title">📅 07. Personalized Study Planner</div>
-        <p class="workbench-desc">Build a day-by-day milestone roadmap based on your exam date, subjects, and daily study hours.</p>
+        <div class="window-header">
+            <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+            <div class="window-title">📅 07. Personalized Study Planner</div>
+        </div>
         """,
         unsafe_allow_html=True,
     )
@@ -645,8 +648,10 @@ elif st.session_state.active_tool == "7":
 elif st.session_state.active_tool == "8":
     st.markdown(
         """
-        <div class="workbench-title">🌐 08. Multilingual Translation & ELI5 Simplifier</div>
-        <p class="workbench-desc">Translate complex academic theory into 20+ languages and adjust the explanation complexity.</p>
+        <div class="window-header">
+            <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+            <div class="window-title">🌐 08. Multilingual Translation & ELI5 Simplifier</div>
+        </div>
         """,
         unsafe_allow_html=True,
     )

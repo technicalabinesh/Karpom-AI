@@ -1,11 +1,12 @@
 """
-Karpom AI - Next-Gen Academic Intelligence Platform (Dribbble SaaS UI)
+Karpom AI - Next-Gen Academic Intelligence Platform (Custom Logo Support)
 Run:
     streamlit run app.py
 """
 
 import os
 import uuid
+import base64
 from datetime import datetime
 import streamlit as st
 from dotenv import load_dotenv
@@ -30,7 +31,7 @@ load_dotenv()
 
 st.set_page_config(
     page_title="Karpom AI | Next-Gen Academic Intelligence",
-    page_icon="🌊",
+    page_icon="🌸",
     layout="wide",
     initial_sidebar_state="collapsed",
 )
@@ -70,8 +71,23 @@ def load_chat_history(session_id: str):
             pass
     return []
 
+# Dynamic Logo Engine: Checks for logo.png in project folder
+def get_logo_html(size: int = 28):
+    """Loads custom logo.png from project root or displays default fallback."""
+    for fname in ["logo.png", "logo.jpg", "logo.jpeg", "logo.webp", "logo.svg"]:
+        if os.path.exists(fname):
+            try:
+                with open(fname, "rb") as f:
+                    b64 = base64.b64encode(f.read()).decode("utf-8")
+                mime = "image/svg+xml" if fname.endswith(".svg") else "image/png"
+                return f'<img src="data:{mime};base64,{b64}" width="{size}" height="{size}" style="vertical-align:middle; border-radius:6px; object-fit:contain;" />'
+            except Exception:
+                pass
+    # Fallback emblem if logo.png is not added yet
+    return f'<span style="font-size:{size-6}px; vertical-align:middle;">🌸</span>'
+
 # ============================================================
-# DRIBBBLE-GRADE MATTE DARK DESIGN SYSTEM WITH CENTERED TEXT
+# DRIBBBLE-GRADE MATTE DARK DESIGN SYSTEM
 # ============================================================
 DRIBBBLE_SAAS_CSS = """
 <style>
@@ -394,28 +410,6 @@ div[data-testid="stButton"] > button[kind="primary"] {
 """
 st.markdown(DRIBBBLE_SAAS_CSS, unsafe_allow_html=True)
 
-# Custom Layered Wave Logo SVG
-WAVE_LOGO_SVG = """
-<svg width="26" height="26" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="border-radius: 8px; vertical-align: middle; box-shadow: 0 2px 8px rgba(0,0,0,0.3);">
-    <rect width="32" height="32" rx="8" fill="#18181E"/>
-    <path d="M4 22C8 18 12 26 16 22C20 18 24 26 28 22V28H4V22Z" fill="#C2410C"/>
-    <path d="M4 17C8 13 12 21 16 17C20 13 24 21 28 17V24C24 28 20 20 16 24C12 28 8 20 4 24V17Z" fill="#D97706"/>
-    <path d="M4 12C8 8 12 16 16 12C20 8 24 16 28 12V19C24 23 20 15 16 19C12 23 8 15 4 19V12Z" fill="#E2D4B7"/>
-    <path d="M4 7C8 3 12 11 16 7C20 3 24 11 28 7V14C24 18 20 10 16 14C12 18 8 10 4 14V7Z" fill="#2E5A6B"/>
-    <path d="M4 4H28V9C24 13 20 5 16 9C12 13 8 5 4 9V4Z" fill="#1C2B36"/>
-</svg>
-"""
-
-WAVE_ICON_MINI = """
-<svg width="16" height="16" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="border-radius: 4px; vertical-align: middle;">
-    <rect width="32" height="32" rx="6" fill="#18181E"/>
-    <path d="M4 22C8 18 12 26 16 22C20 18 24 26 28 22V28H4V22Z" fill="#C2410C"/>
-    <path d="M4 17C8 13 12 21 16 17C20 13 24 21 28 17V24C24 28 20 20 16 24C12 28 8 20 4 24V17Z" fill="#D97706"/>
-    <path d="M4 12C8 8 12 16 16 12C20 8 24 16 28 12V19C24 23 20 15 16 19C12 23 8 15 4 19V12Z" fill="#E2D4B7"/>
-    <path d="M4 7C8 3 12 11 16 7C20 3 24 11 28 7V14C24 18 20 10 16 14C12 18 8 10 4 14V7Z" fill="#2E5A6B"/>
-</svg>
-"""
-
 # ============================================================
 # STATE INITIALIZATION
 # ============================================================
@@ -434,7 +428,7 @@ def set_feature(num: str):
     st.rerun()
 
 # ============================================================
-# FLOATING PILL NAVBAR WITH CUSTOM WAVE LOGO
+# FLOATING PILL NAVBAR WITH DYNAMIC CUSTOM LOGO
 # ============================================================
 ai_connected = chat_ai_available()
 status_html = (
@@ -447,7 +441,7 @@ st.markdown(
     f"""
     <div class="nav-pill-container">
         <div class="brand-title">
-            {WAVE_LOGO_SVG} Karpom AI
+            {get_logo_html(size=28)} Karpom AI
         </div>
         <div>
             {status_html}
@@ -458,12 +452,12 @@ st.markdown(
 )
 
 # ============================================================
-# HERO HEADER SECTION - CENTERED
+# HERO HEADER SECTION - CENTERED WITH CUSTOM LOGO BADGE
 # ============================================================
 st.markdown(
     f"""
     <div class="hero-wrapper">
-        <div class="hero-pill-badge">{WAVE_ICON_MINI} Academic Intelligence Suite — 8 Powerful Tools</div>
+        <div class="hero-pill-badge">{get_logo_html(size=18)} Academic Intelligence Suite — 8 Powerful Tools</div>
         <h1 class="hero-headline">Build Your Mind,<br><span class="hero-italic">Accelerate</span> Your Knowledge</h1>
         <p class="hero-subtitle">
             An elite cognitive space engineered for students and researchers. Solve complex homework with Vision AI, 
@@ -477,7 +471,7 @@ st.markdown(
 # ============================================================
 # 8-FEATURE VISUAL CARDS DECK (4x2 GRID)
 # ============================================================
-st.markdown(f'<div class="section-tag">{WAVE_ICON_MINI} SELECT A FEATURE TO LAUNCH WORKBENCH</div>', unsafe_allow_html=True)
+st.markdown(f'<div class="section-tag">{get_logo_html(size=18)} SELECT A FEATURE TO LAUNCH WORKBENCH</div>', unsafe_allow_html=True)
 
 # Row 1 (Cards 1 to 4)
 c1, c2, c3, c4 = st.columns(4)
@@ -677,7 +671,7 @@ if st.session_state.active_feature == "1":
 
         st.markdown(f'<div class="chat-user"><div style="font-size:0.75rem; font-weight:700; opacity:0.85; margin-bottom:5px;">👤 You</div><div>{user_input}</div></div>', unsafe_allow_html=True)
         with st.container():
-            st.markdown('<div style="font-size:0.75rem; color:#818CF8; font-weight:800; margin:10px 0 4px;">Karpom AI</div>', unsafe_allow_html=True)
+            st.markdown(f'<div style="font-size:0.75rem; color:#818CF8; font-weight:800; margin:10px 0 4px;">{get_logo_html(size=16)} Karpom AI</div>', unsafe_allow_html=True)
             stream_gen = stream_answer(user_input, st.session_state.chat_history[:-1])
             full_ai = st.write_stream(stream_gen)
 

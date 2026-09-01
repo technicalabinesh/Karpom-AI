@@ -1,6 +1,6 @@
 """
 Karpom AI - Next-Gen Academic Intelligence Platform
-Harmoniq Editorial Light Design & Multi-View Workspace
+Aeline Sky-Blue Editorial UI + Interactive Academic Workspace
 Run:
     streamlit run app.py
 """
@@ -34,10 +34,10 @@ def get_logo_path():
     for fname in ["logo.png", "logo.jpg", "logo.jpeg", "logo.webp", "logo.svg"]:
         if os.path.exists(fname):
             return fname
-    return "🌸"
+    return "⚡"
 
 st.set_page_config(
-    page_title="Karpom AI | Your Haven for Academic Intelligence",
+    page_title="Karpom AI | Building the Future of Academic Intelligence",
     page_icon=get_logo_path(),
     layout="wide",
     initial_sidebar_state="collapsed",
@@ -79,24 +79,24 @@ def load_chat_history(session_id: str):
     return []
 
 # Dynamic Logo Engine
-def get_logo_html(size: int = 28):
+def get_logo_html(size: int = 30, on_dark: bool = False):
     for fname in ["logo.png", "logo.jpg", "logo.jpeg", "logo.webp", "logo.svg"]:
         if os.path.exists(fname):
             try:
                 with open(fname, "rb") as f:
                     b64 = base64.b64encode(f.read()).decode("utf-8")
                 mime = "image/svg+xml" if fname.endswith(".svg") else "image/png"
+                bg_style = "background:#FFFFFF;" if on_dark else "background:transparent;"
                 return (
                     f'<span style="display:inline-flex; align-items:center; justify-content:center; '
-                    f'background:#FFFFFF; border-radius:10px; padding:2px; vertical-align:middle; '
-                    f'box-shadow: 0 2px 8px rgba(0,0,0,0.06);">'
+                    f'{bg_style} border-radius:10px; padding:2px; vertical-align:middle;">'
                     f'<img src="data:{mime};base64,{b64}" width="{size}" height="{size}" '
                     f'style="object-fit:contain; border-radius:8px; display:block;" />'
                     f'</span>'
                 )
             except Exception:
                 pass
-    return f'<span style="font-size:{size-6}px; vertical-align:middle;">🌸</span>'
+    return f'<span style="font-size:{size-6}px; vertical-align:middle;">⚡</span>'
 
 # ============================================================
 # STATE INITIALIZATION & ROUTING
@@ -121,280 +121,312 @@ def navigate_to(view_name: str, feature_id: str = None):
     st.rerun()
 
 # ============================================================
-# HARMONIQ EDITORIAL SERENE THEME CSS
+# AELINE DESIGN SYSTEM CSS
 # ============================================================
-HARMONIQ_CSS = """
+AELINE_CSS = """
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap');
 
 :root {
-    --bg-page: #FAF9F6;
-    --text-primary: #121417;
-    --text-secondary: #5E6470;
-    --border-subtle: rgba(0, 0, 0, 0.08);
-    --card-bg: #FFFFFF;
-    --accent: #111827;
+    --sky-blue: #0284C7;
+    --sky-deep: #0369A1;
+    --neon-lime: #D4FF00;
+    --dark-pill: #111827;
+    --card-border: rgba(0, 0, 0, 0.08);
 }
 
 html, body, [class*="css"] {
     font-family: 'Plus Jakarta Sans', sans-serif !important;
-    background-color: var(--bg-page) !important;
-    color: var(--text-primary) !important;
-}
-
-.stApp {
-    background-color: var(--bg-page) !important;
+    color: #111827 !important;
 }
 
 .main .block-container {
-    max-width: 1280px;
-    padding: 1rem 1.5rem 3rem;
+    max-width: 1300px;
+    padding: 0 1rem 3rem !important;
 }
 
-/* Harmoniq Navbar */
-.harmoniq-nav {
+/* Hero Sky Header Container */
+.aeline-hero {
+    background: linear-gradient(180deg, #0284C7 0%, #38BDF8 80%, #BAE6FD 100%);
+    border-radius: 36px;
+    padding: 24px 36px 60px;
+    color: #FFFFFF !important;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin-top: 10px;
+    box-shadow: 0 20px 50px rgba(2, 132, 199, 0.25);
+}
+
+.aeline-hero * {
+    color: #FFFFFF !important;
+}
+
+/* Top Floating Nav */
+.aeline-nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px 0 28px;
+    padding-bottom: 36px;
 }
 
-.brand-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+.nav-brand {
     font-size: 1.35rem;
     font-weight: 800;
     letter-spacing: -0.03em;
-    color: #111827 !important;
-}
-
-.nav-links {
     display: flex;
     align-items: center;
-    gap: 32px;
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: #4B5563;
+    gap: 10px;
 }
 
-/* Arch Dome Glow for Hero */
-.hero-dome-wrapper {
-    position: relative;
-    text-align: center;
-    padding: 30px 20px 20px;
-    margin: 0 auto;
-    max-width: 960px;
-}
-
-.hero-dome-bg {
-    position: absolute;
-    top: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 760px;
-    height: 400px;
-    background: radial-gradient(circle, rgba(219, 234, 254, 0.7) 0%, rgba(240, 246, 255, 0.4) 45%, transparent 70%);
-    border-radius: 500px 500px 0 0;
-    z-index: 0;
-    pointer-events: none;
-}
-
-/* Orbit Floating Badges */
-.floating-orbit-badge {
-    position: absolute;
-    width: 48px;
-    height: 48px;
-    background: #FFFFFF;
-    border-radius: 14px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
-    border: 1px solid rgba(0, 0, 0, 0.05);
+.nav-links-cluster {
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-size: 1.3rem;
-    animation: floatAnim 4s ease-in-out infinite alternate;
-}
-
-@keyframes floatAnim {
-    0% { transform: translateY(0px); }
-    100% { transform: translateY(-8px); }
-}
-
-.badge-pos-1 { top: 20px; left: 14%; animation-delay: 0s; }
-.badge-pos-2 { top: -10px; left: 30%; animation-delay: 0.8s; }
-.badge-pos-3 { top: -25px; left: 50%; transform: translateX(-50%); animation-delay: 0.4s; }
-.badge-pos-4 { top: -10px; right: 30%; animation-delay: 1.2s; }
-.badge-pos-5 { top: 20px; right: 14%; animation-delay: 0.6s; }
-
-/* Editorial Hero Typography */
-.hero-content {
-    position: relative;
-    z-index: 1;
-}
-
-.announcement-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: #FFFFFF;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
-    padding: 6px 18px;
-    border-radius: 9999px;
-    font-size: 0.86rem;
+    gap: 28px;
+    font-size: 0.88rem;
     font-weight: 600;
-    color: #1F2937;
-    margin-bottom: 24px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
 }
 
-.hero-editorial-title {
-    font-family: 'Instrument Serif', serif;
-    font-size: 4.6rem;
-    font-weight: 400;
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-    color: #111827;
-    margin: 0 0 18px;
+/* Hero Typography */
+.hero-title {
+    font-size: 3.8rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+    margin: 12px 0 16px;
 }
 
-.hero-editorial-title i {
-    font-style: italic;
-    color: #4F46E5;
-}
-
-.hero-subtext {
+.hero-subtitle {
     font-size: 1.12rem;
-    color: #5E6470;
-    max-width: 660px;
-    margin: 0 auto 32px;
+    font-weight: 400;
+    max-width: 680px;
+    margin: 0 auto 30px;
+    opacity: 0.92;
     line-height: 1.6;
 }
 
-/* Feature Cards */
-.harmoniq-card {
-    background: #FFFFFF;
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    border-radius: 20px;
-    padding: 24px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.03);
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    min-height: 200px;
+/* 3D Curved Cards Horizon */
+.deck-horizon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    margin: 36px auto 20px;
+    perspective: 1200px;
+    overflow-x: auto;
+    padding: 20px 0;
+}
+
+.deck-item {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 18px;
+    padding: 16px;
+    width: 140px;
+    min-width: 140px;
+    height: 160px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.4);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin-bottom: 12px;
+    transition: transform 0.3s ease;
 }
 
-.harmoniq-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.07);
-    border-color: rgba(99, 102, 241, 0.3);
+.deck-item:hover {
+    transform: translateY(-10px) scale(1.05);
 }
 
-.card-icon-pill {
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
+.deck-item * {
+    color: #111827 !important;
+}
+
+.deck-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.3rem;
-    margin-bottom: 14px;
+    font-size: 1.2rem;
 }
 
-.card-num {
+.deck-title {
+    font-size: 0.82rem;
+    font-weight: 700;
+    margin: 4px 0 0;
+    line-height: 1.3;
+}
+
+.deck-stat {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.78rem;
-    font-weight: 700;
-    color: #9CA3AF;
-}
-
-.card-h {
-    font-size: 1.18rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    color: #111827 !important;
-    margin: 0 0 6px;
-}
-
-.card-p {
-    font-size: 0.88rem;
+    font-size: 0.75rem;
     color: #6B7280 !important;
-    line-height: 1.45;
-    margin: 0;
+    font-weight: 600;
 }
 
-/* Button Customization */
+/* Rating Badge */
+.rating-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    opacity: 0.95;
+    margin-top: 16px;
+}
+
+/* Bento Showcase Section */
+.bento-section {
+    padding: 60px 0 20px;
+    text-align: center;
+}
+
+.section-eyebrow {
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #6B7280;
+    margin-bottom: 8px;
+}
+
+.section-heading {
+    font-size: 2.8rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #111827;
+    margin-bottom: 40px;
+}
+
+.section-heading span.badge-circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    vertical-align: middle;
+    font-size: 1.1rem;
+    margin: 0 4px;
+}
+
+/* Bento Grid Cards */
+.bento-card {
+    border-radius: 28px;
+    padding: 32px;
+    text-align: left;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.25s ease;
+}
+
+.bento-blue {
+    background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+    color: #FFFFFF !important;
+}
+.bento-blue * { color: #FFFFFF !important; }
+
+.bento-white {
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+}
+
+.bento-lime {
+    background: #D4FF00;
+    color: #111827 !important;
+}
+.bento-lime * { color: #111827 !important; }
+
+.bento-dark {
+    background: #111827;
+    color: #FFFFFF !important;
+}
+.bento-dark * { color: #FFFFFF !important; }
+
+.bento-big-num {
+    font-size: 3.4rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+/* Feature Launch Grid */
+.tool-grid-card {
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03);
+    min-height: 210px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.2s ease;
+    margin-bottom: 12px;
+}
+
+.tool-grid-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
+    border-color: #0284C7;
+}
+
+/* Buttons */
 div[data-testid="stButton"] > button {
     border-radius: 9999px !important;
-    font-weight: 600 !important;
-    font-size: 0.92rem !important;
-    padding: 8px 24px !important;
+    font-weight: 700 !important;
+    font-size: 0.9rem !important;
+    padding: 10px 24px !important;
     transition: all 0.2s ease !important;
 }
 
 div[data-testid="stButton"] > button[kind="primary"] {
-    background-color: #111827 !important;
-    color: #FFFFFF !important;
-    border: 1px solid #111827 !important;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15) !important;
+    background-color: #D4FF00 !important;
+    color: #111827 !important;
+    border: none !important;
+    box-shadow: 0 4px 16px rgba(212, 255, 0, 0.4) !important;
 }
 
 div[data-testid="stButton"] > button[kind="primary"]:hover {
-    background-color: #000000 !important;
-    transform: scale(1.02);
+    background-color: #BEE600 !important;
+    transform: scale(1.03);
 }
 
 div[data-testid="stButton"] > button[kind="secondary"] {
     background-color: #FFFFFF !important;
-    color: #374151 !important;
+    color: #111827 !important;
     border: 1px solid rgba(0, 0, 0, 0.12) !important;
 }
 
-div[data-testid="stButton"] > button[kind="secondary"]:hover {
-    background-color: #F3F4F6 !important;
-    border-color: #9CA3AF !important;
-}
-
-/* Landscape Scenic Backdrop Footer */
-.scenic-footer {
-    position: relative;
-    width: 100%;
-    height: 220px;
-    margin-top: 50px;
-    border-radius: 28px;
-    background: linear-gradient(180deg, rgba(250,249,246,0) 0%, rgba(219,234,254,0.3) 30%, rgba(187,247,208,0.3) 100%),
-                url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    padding-bottom: 24px;
-    box-shadow: inset 0 20px 40px var(--bg-page);
-}
-
-/* Workbench View Specifics */
-.workbench-header {
+/* Workspace Styles */
+.workspace-top {
     background: #FFFFFF;
-    border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 20px;
-    padding: 20px 28px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 16px 24px;
     margin-bottom: 24px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
 }
 
 .chat-user {
-    background: #111827 !important;
+    background: #0284C7 !important;
     color: #FFFFFF !important;
     padding: 14px 20px;
     border-radius: 20px 20px 4px 20px;
     margin: 12px 0 12px auto;
     max-width: 80%;
     font-size: 0.95rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 14px rgba(2, 132, 199, 0.15);
 }
 .chat-user * { color: #FFFFFF !important; }
 
@@ -408,108 +440,163 @@ div[data-testid="stButton"] > button[kind="secondary"]:hover {
     border: 1px solid rgba(0, 0, 0, 0.08);
     font-size: 0.95rem;
     line-height: 1.65;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
-}
-
-div[data-testid="stTextInput"] input,
-div[data-testid="stTextArea"] textarea,
-div[data-testid="stNumberInput"] input,
-div[data-testid="stSelectbox"] div[data-baseweb="select"] {
-    background-color: #FFFFFF !important;
-    color: #111827 !important;
-    border: 1px solid rgba(0, 0, 0, 0.12) !important;
-    border-radius: 12px !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
 }
 
 #MainMenu, footer, header { visibility: hidden; }
 </style>
 """
-st.markdown(HARMONIQ_CSS, unsafe_allow_html=True)
+st.markdown(AELINE_CSS, unsafe_allow_html=True)
 
-# Tool metadata
+# 8 Intelligence Tools Specs
 TOOLS = [
-    {"id": "1", "icon": "🤖", "name": "Offline AI Chatbot", "desc": "Conversational copilot with offline fallback.", "bg": "#EDE9FE", "color": "#7C3AED"},
-    {"id": "2", "icon": "🎙️", "name": "Voice Question Asking", "desc": "Speak complex queries with instant speech transcription.", "bg": "#E0F2FE", "color": "#0284C7"},
-    {"id": "3", "icon": "📷", "name": "Image & Math Solver", "desc": "Vision AI solving handwritten equations & diagrams.", "bg": "#FFE4E6", "color": "#E11D48"},
-    {"id": "4", "icon": "📄", "name": "PDF & Notes Q&A", "desc": "Ground research and book questions into uploaded docs.", "bg": "#D1FAE5", "color": "#059669"},
-    {"id": "5", "icon": "📝", "name": "Cornell Notes Generator", "desc": "Convert lecture transcripts into structured recall cues.", "bg": "#FEF3C7", "color": "#D97706"},
-    {"id": "6", "icon": "🧠", "name": "MCQ & Exam Generator", "desc": "Practice tests tailored to any syllabus or topic.", "bg": "#FAE8FF", "color": "#C026D3"},
-    {"id": "7", "icon": "📅", "name": "Smart Study Planner", "desc": "Day-by-day milestone roadmap customized to exam dates.", "bg": "#DBEAFE", "color": "#2563EB"},
-    {"id": "8", "icon": "🌐", "name": "Multilingual & ELI5", "desc": "Translate academic theory with 5-level simplification.", "bg": "#CCFBF1", "color": "#0D9488"},
+    {"id": "1", "icon": "🤖", "name": "Offline AI Chatbot", "desc": "Conversational intelligence with instant offline fallback.", "bg": "#EDE9FE", "badge": "Core"},
+    {"id": "2", "icon": "🎙️", "name": "Voice Asking", "desc": "Speak complex equations and questions via neural speech-to-text.", "bg": "#E0F2FE", "badge": "Voice"},
+    {"id": "3", "icon": "📷", "name": "Vision Math Solver", "desc": "Step-by-step solver for handwritten homework & circuit diagrams.", "bg": "#FFE4E6", "badge": "Vision"},
+    {"id": "4", "icon": "📄", "name": "PDF / Notes Q&A", "desc": "Ground research and textbook questions into your uploaded documents.", "bg": "#D1FAE5", "badge": "RAG"},
+    {"id": "5", "icon": "📝", "name": "Cornell Notes Maker", "desc": "Synthesize lecture transcripts into structured recall cues & summary.", "bg": "#FEF3C7", "badge": "Notes"},
+    {"id": "6", "icon": "🧠", "name": "MCQ & Exam Engine", "desc": "Practice tests tailored to any syllabus or difficulty level.", "bg": "#FAE8FF", "badge": "Exam"},
+    {"id": "7", "icon": "📅", "name": "Smart Study Planner", "desc": "Personalized day-by-day milestone roadmap before your test.", "bg": "#DBEAFE", "badge": "Plan"},
+    {"id": "8", "icon": "🌐", "name": "Translation & ELI5", "desc": "Translate complex theory into 20+ languages with 5 simplification tiers.", "bg": "#CCFBF1", "badge": "20+ Langs"},
 ]
 
 # ============================================================
-# VIEW 1: HARMONIQ LANDING PAGE
+# VIEW 1: AELINE SKY-BLUE LANDING PAGE
 # ============================================================
 if st.session_state.view == "landing":
-    
-    # 1. Top Navbar
+
+    # --- 1. HERO HEADER SECTION ---
     ai_status = chat_ai_available()
-    status_tag = (
-        '<span style="color:#059669; font-weight:700; font-size:0.8rem; background:#D1FAE5; padding:4px 12px; border-radius:9999px;">● Cloud AI Active</span>'
-        if ai_status else
-        '<span style="color:#D97706; font-weight:700; font-size:0.8rem; background:#FEF3C7; padding:4px 12px; border-radius:9999px;">● Offline Ready</span>'
+    status_text = "● Cloud AI Active" if ai_status else "● Offline Ready"
+
+    st.markdown(
+        f"""
+        <div class="aeline-hero">
+            <div class="aeline-nav">
+                <div class="nav-brand">
+                    {get_logo_html(size=30, on_dark=True)} Karpom AI
+                </div>
+                <div class="nav-links-cluster">
+                    <span>Platform</span>
+                    <span>Tools</span>
+                    <span>Research</span>
+                    <span style="background:rgba(255,255,255,0.2); padding:4px 12px; border-radius:9999px;">{status_text}</span>
+                </div>
+            </div>
+            
+            <h1 class="hero-title">
+                Building the future with<br>Academic AI and strategy
+            </h1>
+            <p class="hero-subtitle">
+                We empower students, engineers, and researchers to unlock rapid learning and efficiency through multimodal reasoning and intelligent automation.
+            </p>
+            
+            <!-- 3D Card Orbit Carousel -->
+            <div class="deck-horizon">
+                <div class="deck-item" style="transform: rotate(-6deg);">
+                    <div class="deck-icon" style="background:#EDE9FE;">🤖</div>
+                    <div class="deck-title">Offline Chatbot</div>
+                    <div class="deck-stat">Real-Time</div>
+                </div>
+                <div class="deck-item" style="transform: rotate(-3deg);">
+                    <div class="deck-icon" style="background:#FFE4E6;">📷</div>
+                    <div class="deck-title">Vision Solver</div>
+                    <div class="deck-stat">Step-by-step</div>
+                </div>
+                <div class="deck-item" style="transform: scale(1.08); border: 2px solid #D4FF00;">
+                    <div class="deck-icon" style="background:#D1FAE5;">📄</div>
+                    <div class="deck-title">Document RAG</div>
+                    <div class="deck-stat">99.8% Grounded</div>
+                </div>
+                <div class="deck-item" style="transform: rotate(3deg);">
+                    <div class="deck-icon" style="background:#FEF3C7;">📝</div>
+                    <div class="deck-title">Cornell Notes</div>
+                    <div class="deck-stat">High-Yield</div>
+                </div>
+                <div class="deck-item" style="transform: rotate(6deg);">
+                    <div class="deck-icon" style="background:#CCFBF1;">🌐</div>
+                    <div class="deck-title">ELI5 Engine</div>
+                    <div class="deck-stat">20+ Langs</div>
+                </div>
+            </div>
+            
+            <div class="rating-pill">
+                Rated 4.9/5 by 12,000+ students & researchers ★★★★★
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
     )
-    
-    n_col1, n_col2 = st.columns([1, 1])
-    with n_col1:
+
+    # Hero Dual CTA Buttons
+    st.write("")
+    cta1, cta2, cta3 = st.columns([1.5, 1, 1.5])
+    with cta2:
+        if st.button("GET STARTED ↗", key="btn_hero_launch", type="primary", use_container_width=True):
+            navigate_to("workspace", "1")
+
+    # --- 2. BENTO STATS SECTION ---
+    st.markdown(
+        """
+        <div class="bento-section">
+            <div class="section-eyebrow">• ABOUT US •</div>
+            <h2 class="section-heading">
+                A cognitive intelligence suite<br>
+                dedicated to building <span class="badge-circle" style="background:#0284C7; color:#FFF;">⏱</span> smarter and <span class="badge-circle" style="background:#D4FF00; color:#111;">💡</span> more adaptive minds
+            </h2>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    b1, b2, b3 = st.columns([1.3, 1, 1])
+    with b1:
         st.markdown(
-            f"""
-            <div class="brand-wrapper">
-                {get_logo_html(size=32)} Karpom AI
+            """
+            <div class="bento-card bento-blue">
+                <div style="font-weight:800; font-size:1.1rem; letter-spacing:0.04em;">KARPOM RESEARCH</div>
+                <div style="margin-top:40px;">
+                    <div class="bento-big-num">120+</div>
+                    <div style="font-size:0.95rem; opacity:0.9;">Universities & competitive academic curricula fully indexed and supported.</div>
+                </div>
             </div>
             """,
             unsafe_allow_html=True
         )
-    with n_col2:
-        btn_c1, btn_c2 = st.columns([2, 1])
-        with btn_c1:
-            st.markdown(f'<div style="text-align:right; padding-top:8px;">{status_tag}</div>', unsafe_allow_html=True)
-        with btn_c2:
-            if st.button("Open App ➔", key="nav_launch_top", type="primary", use_container_width=True):
-                navigate_to("workspace", "1")
-
-    # 2. Harmoniq Arched Hero Section
-    st.markdown(
-        f"""
-        <div class="hero-dome-wrapper">
-            <div class="hero-dome-bg"></div>
-            
-            <!-- Orbit Badges -->
-            <div class="floating-orbit-badge badge-pos-1">📝</div>
-            <div class="floating-orbit-badge badge-pos-2">📷</div>
-            <div class="floating-orbit-badge badge-pos-3">🤖</div>
-            <div class="floating-orbit-badge badge-pos-4">🧠</div>
-            <div class="floating-orbit-badge badge-pos-5">🎙️</div>
-            
-            <div class="hero-content">
-                <div class="announcement-pill">
-                    {get_logo_html(size=18)} Academic Intelligence 2.0 • 8 Super Tools 🚀
-                </div>
-                <h1 class="hero-editorial-title">
-                    Your Haven for <i>Seamless</i><br>Academic Mastery
-                </h1>
-                <p class="hero-subtext">
-                    Empowering students, engineers, and researchers with effortless AI tools to conquer complex exams, 
-                    decode handwritten math, query research documents, and synthesize knowledge effortlessly.
-                </p>
+    with b2:
+        st.markdown(
+            """
+            <div class="bento-card bento-white">
+                <div style="font-size:0.85rem; color:#6B7280; font-weight:700;">ACCURACY COMMITMENT</div>
+                <div class="bento-big-num" style="color:#111827; margin-top:20px;">100%</div>
+                <p style="font-size:0.88rem; color:#6B7280; margin:0;">"Step-by-step proofs ensure deep conceptual mastery, not just fast answers."</p>
             </div>
+            """,
+            unsafe_allow_html=True
+        )
+    with b3:
+        st.markdown(
+            """
+            <div class="bento-card bento-lime">
+                <div style="font-size:0.85rem; font-weight:800; text-transform:uppercase;">Data Points</div>
+                <div class="bento-big-num">520k+</div>
+                <div style="font-size:0.9rem; font-weight:600;">Academic questions solved to power smarter study roadmaps.</div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+    # --- 3. 8-TOOL WORKBENCH LAUNCHER DECK ---
+    st.write("")
+    st.markdown(
+        """
+        <div style="margin:50px 0 20px; text-align:center;">
+            <div class="section-eyebrow">• EXPLORE CAPABILITIES •</div>
+            <h2 style="font-size:2.2rem; font-weight:800; letter-spacing:-0.03em;">Select a Tool to Launch Workbench</h2>
         </div>
         """,
-        unsafe_allow_html=True,
+        unsafe_allow_html=True
     )
-    
-    # CTA Buttons (Hero)
-    cta_c1, cta_c2, cta_c3 = st.columns([1.5, 1, 1.5])
-    with cta_c2:
-        if st.button("✨ Launch Workspace", key="hero_cta_btn", type="primary", use_container_width=True):
-            navigate_to("workspace", "1")
-
-    st.write("")
-    st.write("")
-
-    # 3. 8-Tool Bento Showcase Deck
-    st.markdown('<div style="font-size:0.85rem; font-weight:800; color:#6B7280; text-transform:uppercase; letter-spacing:0.08em; text-align:center; margin:30px 0 16px;">✨ Explore All Intelligence Engines</div>', unsafe_allow_html=True)
 
     # Row 1 (Tools 1 to 4)
     r1_cols = st.columns(4)
@@ -518,20 +605,20 @@ if st.session_state.view == "landing":
         with r1_cols[idx]:
             st.markdown(
                 f"""
-                <div class="harmoniq-card">
+                <div class="tool-grid-card">
                     <div>
-                        <div style="display:flex; justify-content:space-between; align-items:center;">
-                            <div class="card-icon-pill" style="background:{tool['bg']}; color:{tool['color']};">{tool['icon']}</div>
-                            <span class="card-num">0{tool['id']}</span>
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                            <span style="font-size:1.4rem; background:{tool['bg']}; padding:6px 10px; border-radius:12px;">{tool['icon']}</span>
+                            <span style="font-family:'JetBrains Mono'; font-size:0.75rem; font-weight:700; background:#F3F4F6; padding:3px 8px; border-radius:6px;">0{tool['id']}</span>
                         </div>
-                        <h3 class="card-h">{tool['name']}</h3>
-                        <p class="card-p">{tool['desc']}</p>
+                        <h4 style="font-size:1.1rem; font-weight:700; margin:0 0 6px;">{tool['name']}</h4>
+                        <p style="font-size:0.85rem; color:#6B7280; margin:0; line-height:1.4;">{tool['desc']}</p>
                     </div>
                 </div>
                 """,
                 unsafe_allow_html=True
             )
-            if st.button(f"Launch 0{tool['id']} ↗", key=f"btn_land_{tool['id']}", use_container_width=True, type="secondary"):
+            if st.button(f"Launch 0{tool['id']} ↗", key=f"btn_card_{tool['id']}", use_container_width=True, type="secondary"):
                 navigate_to("workspace", tool["id"])
 
     # Row 2 (Tools 5 to 8)
@@ -541,73 +628,62 @@ if st.session_state.view == "landing":
         with r2_cols[idx - 4]:
             st.markdown(
                 f"""
-                <div class="harmoniq-card">
+                <div class="tool-grid-card">
                     <div>
-                        <div style="display:flex; justify-content:space-between; align-items:center;">
-                            <div class="card-icon-pill" style="background:{tool['bg']}; color:{tool['color']};">{tool['icon']}</div>
-                            <span class="card-num">0{tool['id']}</span>
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                            <span style="font-size:1.4rem; background:{tool['bg']}; padding:6px 10px; border-radius:12px;">{tool['icon']}</span>
+                            <span style="font-family:'JetBrains Mono'; font-size:0.75rem; font-weight:700; background:#F3F4F6; padding:3px 8px; border-radius:6px;">0{tool['id']}</span>
                         </div>
-                        <h3 class="card-h">{tool['name']}</h3>
-                        <p class="card-p">{tool['desc']}</p>
+                        <h4 style="font-size:1.1rem; font-weight:700; margin:0 0 6px;">{tool['name']}</h4>
+                        <p style="font-size:0.85rem; color:#6B7280; margin:0; line-height:1.4;">{tool['desc']}</p>
                     </div>
                 </div>
                 """,
                 unsafe_allow_html=True
             )
-            if st.button(f"Launch 0{tool['id']} ↗", key=f"btn_land_{tool['id']}", use_container_width=True, type="secondary"):
+            if st.button(f"Launch 0{tool['id']} ↗", key=f"btn_card_{tool['id']}", use_container_width=True, type="secondary"):
                 navigate_to("workspace", tool["id"])
 
-    # 4. Lush Scenic Footer
-    st.markdown(
-        f"""
-        <div class="scenic-footer">
-            <div style="background:rgba(255,255,255,0.9); backdrop-filter:blur(8px); padding:8px 24px; border-radius:9999px; font-weight:700; font-size:0.88rem; color:#111827; box-shadow:0 4px 20px rgba(0,0,0,0.08);">
-                {get_logo_html(size=20)} Karpom AI • Designed for Intellectual Acceleration
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
 
 # ============================================================
-# VIEW 2: DEDICATED APP WORKBENCH PAGE
+# VIEW 2: DEDICATED WORKBENCH PAGE
 # ============================================================
 elif st.session_state.view == "workspace":
 
-    # Top Bar with Back to Home
-    top_col1, top_col2, top_col3 = st.columns([1.2, 3, 1])
-    with top_col1:
-        if st.button("← Back to Home", key="btn_back_home", type="secondary"):
+    # Top Bar Navigation with Return Link
+    top1, top2, top3 = st.columns([1.2, 3, 1.2])
+    with top1:
+        if st.button("← Back to Home", key="btn_back_to_home", type="secondary"):
             navigate_to("landing")
-    with top_col2:
+    with top2:
         st.markdown(
             f"""
-            <div style="text-align:center; display:flex; align-items:center; justify-content:center; gap:10px;">
+            <div style="text-align:center; display:flex; align-items:center; justify-content:center; gap:8px;">
                 {get_logo_html(size=26)}
-                <span style="font-weight:800; font-size:1.15rem; color:#111827;">Karpom AI Workspace</span>
+                <span style="font-weight:800; font-size:1.15rem; color:#111827;">Karpom AI Interactive Workspace</span>
             </div>
             """,
             unsafe_allow_html=True
         )
-    with top_col3:
-        if st.button("Reset Session 🗑", key="btn_reset_ws", type="secondary"):
+    with top3:
+        if st.button("Reset Session 🗑", key="btn_ws_reset", type="secondary"):
             st.session_state.chat_history = []
             st.session_state.session_id = str(uuid.uuid4())
             st.rerun()
 
     # Tool Navigation Switcher Pill Bar
     tool_names = [f"0{t['id']}. {t['name']}" for t in TOOLS]
-    current_idx = int(st.session_state.active_feature) - 1
+    curr_idx = int(st.session_state.active_feature) - 1
     selected_tool_str = st.radio(
-        "Switch Tool:",
+        "Switch Workspace Tool:",
         tool_names,
-        index=current_idx,
+        index=curr_idx,
         horizontal=True,
         label_visibility="collapsed"
     )
-    new_feat_id = selected_tool_str.split(".")[0].replace("0", "")
-    if new_feat_id != st.session_state.active_feature:
-        st.session_state.active_feature = new_feat_id
+    new_id = selected_tool_str.split(".")[0].replace("0", "")
+    if new_id != st.session_state.active_feature:
+        st.session_state.active_feature = new_id
         st.rerun()
 
     st.write("")
@@ -618,10 +694,10 @@ elif st.session_state.view == "workspace":
     if st.session_state.active_feature == "1":
         st.markdown(
             """
-            <div class="workbench-header">
+            <div class="workspace-top">
                 <div>
-                    <h3 style="margin:0 0 4px; font-size:1.3rem; font-weight:800; color:#111827;">🤖 Feature 01: Conversational AI Copilot</h3>
-                    <p style="margin:0; color:#6B7280; font-size:0.9rem;">Real-time token streaming for deep problem solving, code reasoning, and conceptual proofs.</p>
+                    <h3 style="margin:0; font-size:1.25rem; font-weight:800; color:#111827;">🤖 Feature 01: Conversational AI Copilot</h3>
+                    <p style="margin:4px 0 0; color:#6B7280; font-size:0.88rem;">Real-time token streaming for deep problem solving, code reasoning, and conceptual proofs.</p>
                 </div>
             </div>
             """,
@@ -651,7 +727,7 @@ elif st.session_state.view == "workspace":
 
             st.markdown(f'<div class="chat-user"><div style="font-size:0.75rem; font-weight:700; opacity:0.8; margin-bottom:5px;">👤 You</div><div>{user_input}</div></div>', unsafe_allow_html=True)
             with st.container():
-                st.markdown(f'<div style="font-size:0.8rem; color:#4F46E5; font-weight:800; margin:10px 0 4px; display:flex; align-items:center; gap:6px;">{get_logo_html(size=16)} Karpom AI</div>', unsafe_allow_html=True)
+                st.markdown(f'<div style="font-size:0.8rem; color:#0284C7; font-weight:800; margin:10px 0 4px; display:flex; align-items:center; gap:6px;">{get_logo_html(size=16)} Karpom AI</div>', unsafe_allow_html=True)
                 stream_gen = stream_answer(user_input, st.session_state.chat_history[:-1])
                 full_ai = st.write_stream(stream_gen)
 
@@ -665,10 +741,10 @@ elif st.session_state.view == "workspace":
     elif st.session_state.active_feature == "2":
         st.markdown(
             """
-            <div class="workbench-header">
+            <div class="workspace-top">
                 <div>
-                    <h3 style="margin:0 0 4px; font-size:1.3rem; font-weight:800; color:#111827;">🎙️ Feature 02: Voice Question Asking</h3>
-                    <p style="margin:0; color:#6B7280; font-size:0.9rem;">Speak your question directly. Speech recognition transcribes and solves it instantly.</p>
+                    <h3 style="margin:0; font-size:1.25rem; font-weight:800; color:#111827;">🎙️ Feature 02: Voice Question Asking</h3>
+                    <p style="margin:4px 0 0; color:#6B7280; font-size:0.88rem;">Speak your question directly. Speech recognition transcribes and solves it instantly.</p>
                 </div>
             </div>
             """,
@@ -690,15 +766,15 @@ elif st.session_state.view == "workspace":
                         st.markdown(f'<div class="chat-ai" style="max-width:100%;">{full_res}</div>', unsafe_allow_html=True)
 
     # ------------------------------------------------------------
-    # 3. IMAGE & MATH QUESTION SOLVER
+    # 3. VISION MATH & IMAGE SOLVER
     # ------------------------------------------------------------
     elif st.session_state.active_feature == "3":
         st.markdown(
             """
-            <div class="workbench-header">
+            <div class="workspace-top">
                 <div>
-                    <h3 style="margin:0 0 4px; font-size:1.3rem; font-weight:800; color:#111827;">📷 Feature 03: Vision Homework & Diagram Solver</h3>
-                    <p style="margin:0; color:#6B7280; font-size:0.9rem;">Upload or snap a photo of any handwritten math problem, circuit diagram, or textbook page.</p>
+                    <h3 style="margin:0; font-size:1.25rem; font-weight:800; color:#111827;">📷 Feature 03: Vision Homework & Diagram Solver</h3>
+                    <p style="margin:4px 0 0; color:#6B7280; font-size:0.88rem;">Upload or snap a photo of any handwritten math problem, circuit diagram, or textbook page.</p>
                 </div>
             </div>
             """,
@@ -726,7 +802,7 @@ elif st.session_state.view == "workspace":
             else:
                 with st.spinner("🔮 Neural Vision analyzing question..."):
                     sol = solve_image_question(img_data, custom_instr)
-                    st.markdown(f'<div class="chat-ai" style="max-width:100%;"><h4 style="color:#E11D48; margin:0 0 10px;">📝 Step-by-Step Solution</h4><div style="line-height:1.7;">{sol}</div></div>', unsafe_allow_html=True)
+                    st.markdown(f'<div class="chat-ai" style="max-width:100%;"><h4 style="color:#0284C7; margin:0 0 10px;">📝 Step-by-Step Solution</h4><div style="line-height:1.7;">{sol}</div></div>', unsafe_allow_html=True)
 
     # ------------------------------------------------------------
     # 4. PDF / NOTES Q&A
@@ -734,10 +810,10 @@ elif st.session_state.view == "workspace":
     elif st.session_state.active_feature == "4":
         st.markdown(
             """
-            <div class="workbench-header">
+            <div class="workspace-top">
                 <div>
-                    <h3 style="margin:0 0 4px; font-size:1.3rem; font-weight:800; color:#111827;">📄 Feature 04: Document Q&A & Research RAG</h3>
-                    <p style="margin:0; color:#6B7280; font-size:0.9rem;">Upload lecture slides, syllabus PDFs, or research papers and query them with strict factual grounding.</p>
+                    <h3 style="margin:0; font-size:1.25rem; font-weight:800; color:#111827;">📄 Feature 04: Document Q&A & Research RAG</h3>
+                    <p style="margin:4px 0 0; color:#6B7280; font-size:0.88rem;">Upload lecture slides, syllabus PDFs, or research papers and query them with strict factual grounding.</p>
                 </div>
             </div>
             """,
@@ -762,10 +838,10 @@ elif st.session_state.view == "workspace":
     elif st.session_state.active_feature == "5":
         st.markdown(
             """
-            <div class="workbench-header">
+            <div class="workspace-top">
                 <div>
-                    <h3 style="margin:0 0 4px; font-size:1.3rem; font-weight:800; color:#111827;">📝 Feature 05: Cornell Notes Generator</h3>
-                    <p style="margin:0; color:#6B7280; font-size:0.9rem;">Turn raw lecture transcripts into high-yield Cornell study guides with flashcard recall cues.</p>
+                    <h3 style="margin:0; font-size:1.25rem; font-weight:800; color:#111827;">📝 Feature 05: Cornell Notes Generator</h3>
+                    <p style="margin:4px 0 0; color:#6B7280; font-size:0.88rem;">Turn raw lecture transcripts into high-yield Cornell study guides with flashcard recall cues.</p>
                 </div>
             </div>
             """,
@@ -797,10 +873,10 @@ elif st.session_state.view == "workspace":
     elif st.session_state.active_feature == "6":
         st.markdown(
             """
-            <div class="workbench-header">
+            <div class="workspace-top">
                 <div>
-                    <h3 style="margin:0 0 4px; font-size:1.3rem; font-weight:800; color:#111827;">🧠 Feature 06: MCQ & Practice Exam Generator</h3>
-                    <p style="margin:0; color:#6B7280; font-size:0.9rem;">Generate customized practice tests with deep explanations and full answer keys.</p>
+                    <h3 style="margin:0; font-size:1.25rem; font-weight:800; color:#111827;">🧠 Feature 06: MCQ & Practice Exam Generator</h3>
+                    <p style="margin:4px 0 0; color:#6B7280; font-size:0.88rem;">Generate customized practice tests with deep explanations and full answer keys.</p>
                 </div>
             </div>
             """,
@@ -829,10 +905,10 @@ elif st.session_state.view == "workspace":
     elif st.session_state.active_feature == "7":
         st.markdown(
             """
-            <div class="workbench-header">
+            <div class="workspace-top">
                 <div>
-                    <h3 style="margin:0 0 4px; font-size:1.3rem; font-weight:800; color:#111827;">📅 Feature 07: Personalized Study Planner</h3>
-                    <p style="margin:0; color:#6B7280; font-size:0.9rem;">Build a structured milestone revision roadmap tailored to your upcoming test date.</p>
+                    <h3 style="margin:0; font-size:1.25rem; font-weight:800; color:#111827;">📅 Feature 07: Personalized Study Planner</h3>
+                    <p style="margin:4px 0 0; color:#6B7280; font-size:0.88rem;">Build a structured milestone revision roadmap tailored to your upcoming test date.</p>
                 </div>
             </div>
             """,
@@ -861,10 +937,10 @@ elif st.session_state.view == "workspace":
     elif st.session_state.active_feature == "8":
         st.markdown(
             """
-            <div class="workbench-header">
+            <div class="workspace-top">
                 <div>
-                    <h3 style="margin:0 0 4px; font-size:1.3rem; font-weight:800; color:#111827;">🌐 Feature 08: Multilingual Translation & ELI5 Simplifier</h3>
-                    <p style="margin:0; color:#6B7280; font-size:0.9rem;">Translate complex academic theory into 20+ languages and adjust cognitive difficulty levels.</p>
+                    <h3 style="margin:0; font-size:1.25rem; font-weight:800; color:#111827;">🌐 Feature 08: Multilingual Translation & ELI5 Simplifier</h3>
+                    <p style="margin:4px 0 0; color:#6B7280; font-size:0.88rem;">Translate complex academic theory into 20+ languages and adjust cognitive difficulty levels.</p>
                 </div>
             </div>
             """,

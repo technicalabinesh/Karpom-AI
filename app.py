@@ -30,9 +30,15 @@ from study_tools import (
 # ============================================================
 load_dotenv()
 
+# Check for local logo file to use as browser tab favicon
+FAVICON_FILE = next(
+    (f for f in ["logo.png", "logo.webp", "logo.jpg", "logo.jpeg", "logo.svg"] if os.path.exists(f)),
+    "🌸"
+)
+
 st.set_page_config(
     page_title="Karpom AI | Next-Gen Academic Intelligence",
-    page_icon="🌸",
+    page_icon=FAVICON_FILE,
     layout="wide",
     initial_sidebar_state="collapsed",
 )
@@ -72,19 +78,24 @@ def load_chat_history(session_id: str):
             pass
     return []
 
-# Dynamic Logo Engine: Checks for logo.png in project folder
+# Dynamic Logo Engine: Loads custom Karpom AI logo with retro pop styling
 def get_logo_html(size: int = 28):
-    """Loads custom logo.png from project root or displays default fallback."""
-    for fname in ["logo.png", "logo.jpg", "logo.jpeg", "logo.webp", "logo.svg"]:
+    """Loads custom logo from project root or displays default fallback."""
+    for fname in ["logo.png", "logo.webp", "logo.jpg", "logo.jpeg", "logo.svg"]:
         if os.path.exists(fname):
             try:
                 with open(fname, "rb") as f:
                     b64 = base64.b64encode(f.read()).decode("utf-8")
                 mime = "image/svg+xml" if fname.endswith(".svg") else "image/png"
-                return f'<img src="data:{mime};base64,{b64}" width="{size}" height="{size}" style="vertical-align:middle; border-radius:6px; object-fit:contain;" />'
+                return (
+                    f'<img src="data:{mime};base64,{b64}" '
+                    f'width="{size}" height="{size}" '
+                    f'style="vertical-align:middle; border-radius:8px; object-fit:cover; '
+                    f'box-shadow: 0 2px 8px rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.15);" />'
+                )
             except Exception:
                 pass
-    # Fallback emblem if logo.png is not added yet
+    # Fallback emblem if logo file is missing
     return f'<span style="font-size:{size-6}px; vertical-align:middle;">🌸</span>'
 
 # ============================================================
@@ -172,7 +183,7 @@ html, body, [class*="css"] {
     letter-spacing: -0.03em;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     color: #FFFFFF !important;
 }
 
@@ -455,7 +466,7 @@ if st.session_state.view == "landing":
         f"""
         <div class="nav-pill-container">
             <div class="brand-title">
-                {get_logo_html(size=28)} Karpom AI
+                {get_logo_html(size=32)} Karpom AI
             </div>
             <div>
                 {status_html}
@@ -469,7 +480,7 @@ if st.session_state.view == "landing":
     st.markdown(
         f"""
         <div class="hero-wrapper">
-            <div class="hero-pill-badge">{get_logo_html(size=18)} Academic Intelligence Suite — 8 Powerful Tools</div>
+            <div class="hero-pill-badge">{get_logo_html(size=20)} Academic Intelligence Suite — 8 Powerful Tools</div>
             <h1 class="hero-headline">Build Your Mind,<br><span class="hero-italic">Accelerate</span> Your Knowledge</h1>
             <p class="hero-subtitle">
                 An elite cognitive space engineered for students and researchers. Solve complex homework with Vision AI, 
@@ -481,7 +492,7 @@ if st.session_state.view == "landing":
     )
 
     # 3. 8-Feature Visual Cards Deck
-    st.markdown(f'<div class="section-tag">{get_logo_html(size=18)} SELECT A FEATURE TO LAUNCH WORKBENCH</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="section-tag">{get_logo_html(size=20)} SELECT A FEATURE TO LAUNCH WORKBENCH</div>', unsafe_allow_html=True)
 
     # Row 1 (Cards 1 to 4)
     c1, c2, c3, c4 = st.columns(4)
@@ -655,8 +666,8 @@ elif st.session_state.view == "workspace":
     with nav_center:
         st.markdown(
             f"""
-            <div style="text-align:center; display:flex; align-items:center; justify-content:center; gap:10px; font-weight:800; font-size:1.15rem; color:#FFFFFF;">
-                {get_logo_html(size=24)} Karpom AI Workspace
+            <div style="text-align:center; display:flex; align-items:center; justify-content:center; gap:12px; font-weight:800; font-size:1.15rem; color:#FFFFFF;">
+                {get_logo_html(size=28)} Karpom AI Workspace
             </div>
             """,
             unsafe_allow_html=True
@@ -706,7 +717,7 @@ elif st.session_state.view == "workspace":
 
             st.markdown(f'<div class="chat-user"><div style="font-size:0.75rem; font-weight:700; opacity:0.85; margin-bottom:5px;">👤 You</div><div>{user_input}</div></div>', unsafe_allow_html=True)
             with st.container():
-                st.markdown(f'<div style="font-size:0.75rem; color:#818CF8; font-weight:800; margin:10px 0 4px;">{get_logo_html(size=16)} Karpom AI</div>', unsafe_allow_html=True)
+                st.markdown(f'<div style="font-size:0.75rem; color:#818CF8; font-weight:800; margin:10px 0 4px; display:flex; align-items:center; gap:8px;">{get_logo_html(size=20)} Karpom AI</div>', unsafe_allow_html=True)
                 stream_gen = stream_answer(user_input, st.session_state.chat_history[:-1])
                 full_ai = st.write_stream(stream_gen)
 
@@ -919,4 +930,3 @@ elif st.session_state.view == "workspace":
                     st.markdown(f'<div class="chat-ai" style="max-width:100%;">{res_trans}</div>', unsafe_allow_html=True)
 
     st.markdown('</div>', unsafe_allow_html=True)
-    
